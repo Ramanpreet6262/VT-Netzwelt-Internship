@@ -1,0 +1,67 @@
+body {
+    background-image: url(Images/img.jpg);
+    background-size: cover;
+}
+
+#heading {
+    color: darkblue;
+    font-size: 45px;
+    text-align: center;
+}
+
+span {
+    color: red;
+}
+
+.form {
+    margin-left: 30%;
+    margin-top: 30px;
+    background: rgba(192,192,192,0.75);
+    width: 35%;
+    padding: 20px;
+}
+
+/* To adjust div containing form on small screen sizes */
+@media screen and (max-width: 425px) {
+    .form {
+        margin-left: 10%;
+        width: 70%;
+    }
+}
+
+.edit {
+    width: 90%;
+    padding: 12px;
+    margin-top: 6px;
+    margin-bottom: 10px;
+}
+
+input[type=checkbox], input[type=radio]{
+    margin-top: 5px;
+}
+
+#submit {
+    background-color: rgb(36, 221, 36);
+    color:white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#submit:hover {
+    background-color: rgb(187, 5, 5);
+}
+
+#reset {
+    background-color: rgb(21, 117, 243);
+    color:white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#reset:hover {
+    background-color: rgb(187, 5, 5);
+}
