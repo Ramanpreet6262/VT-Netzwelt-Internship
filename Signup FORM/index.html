@@ -1,85 +1,90 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Signup Form</title>
 
-        <!-- To make webpage responsive-->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <title>Signup Form</title>
 
-        <!-- To Link External Stylesheet-->
-        <link rel="stylesheet" href="style.css">
-        
-    </head>
-    <body>
-        <h1 id="heading"><b>Signup!!</b></h1>
+    <!-- To make webpage responsive-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- div for form starts-->
-        <div class="form">
-            <form name="thisform" onsubmit="return(validate(thisform))" method="POST">
-                Username<span>*</span><br>
-                <input type="text" class="edit" name="username" placeholder="Username" required> <br>
+    <!-- To Link External Stylesheet-->
+    <link rel="stylesheet" href="style.css">
 
-                Password<span>*</span><br>
-                <input type="password" class="edit" name="password" placeholder="Password" minlength="8" required><br>
+</head>
 
-                Confirm Password<span>*</span><br>
-                <input type="password" class="edit" name="cfpassword" placeholder="Re-enter Password" minlength="8" required><br>
+<body>
+    <h1 id="heading"><b>Signup!!</b></h1>
 
-                Email<span>*</span><br>
-                <input type="email" name="email" class="edit" placeholder="abc@gmail.com" required><br>
-                <br>
+    <!-- div for form starts-->
+    <div class="form">
+        <form name="thisform" onsubmit="return(validate(thisform))" method="POST">
+            Username<span>*</span><br>
+            <input type="text" class="edit" name="username" placeholder="Username" required> <br>
 
-                Gender<span>*</span><br>
-                <input type="radio" name="gender" value="male" checked>Male<br>
-                <input type="radio" name="gender" value="female">Female<br>
-                <input type="radio" name="gender" value="other">Other<br>
-                <br>
+            Password<span>*</span><br>
+            <input type="password" class="edit" name="password" placeholder="Password" minlength="8" required><br>
 
-                Skills<span>*</span><br>
-                <input type="checkbox" name="s1" value="python">Python<br>
-                <input type="checkbox" name="s2" value="java">Java<br>
-                <input type="checkbox" name="s3" value="javascript">JavaScript<br>
-                <input type="checkbox" name="s4" value="go">Go<br>
-                <input type="checkbox" name="s5" value="rails">Rails<br>
-                <br>
+            Confirm Password<span>*</span><br>
+            <input type="password" class="edit" name="cfpassword" placeholder="Re-enter Password" minlength="8"
+                required><br>
 
-                Country<span>*</span><br>
-                <select value="" class="edit" name="country" required>
-                    <option selected>India</option>
-                    <option>United States of America</option>
-                    <option>Canada</option>
-                    <option>England</option>
-                    <option>Other</option>
-                </select><br>
+            Email<span>*</span><br>
+            <input type="email" name="email" class="edit" placeholder="abc@gmail.com" required><br>
+            <br>
 
-                <input type="datetime-local" class="edit" name="date-time"><br>
+            Gender<span>*</span><br>
+            <input type="radio" name="gender" value="male" checked>Male<br>
+            <input type="radio" name="gender" value="female">Female<br>
+            <input type="radio" name="gender" value="other">Other<br>
+            <br>
 
-                <textarea rows="5" cols="19" class="edit" placeholder="Enter Comments(if any)"></textarea><br>
+            Skills<span>*</span><br>
+            <input type="checkbox" name="s1" value="python">Python<br>
+            <input type="checkbox" name="s2" value="java">Java<br>
+            <input type="checkbox" name="s3" value="javascript">JavaScript<br>
+            <input type="checkbox" name="s4" value="go">Go<br>
+            <input type="checkbox" name="s5" value="rails">Rails<br>
+            <br>
 
-                <!-- START CAPTCHA -->
-                Captcha<span>*</span><br>
-                <div class="capbox">
+            Country<span>*</span><br>
+            <select value="" class="edit" name="country" required>
+                <option selected>India</option>
+                <option>United States of America</option>
+                <option>Canada</option>
+                <option>England</option>
+                <option>Other</option>
+            </select><br>
 
-                    <div id="CaptchaDiv"></div>
+            <input type="datetime-local" class="edit" name="date-time"><br>
 
-                    <div class="capbox-inner">
-                        Type the above number:<br>
+            <textarea rows="5" cols="19" class="edit" placeholder="Enter Comments(if any)"></textarea><br>
 
-                        <input type="hidden" id="txtCaptcha" value="testvalue">
-                        <input type="text" name="CaptchaInput" id="CaptchaInput" size="15"><br>
+            <!-- START CAPTCHA -->
+            Captcha<span>*</span><br>
+            <div class="capbox">
 
-                    </div>
+                <div id="CaptchaDiv"></div>
+
+                <div class="capbox-inner">
+                    Type the above number:<br>
+
+                    <input type="hidden" id="txtCaptcha" value="testvalue">
+                    <input type="text" name="CaptchaInput" id="CaptchaInput" size="15"><br>
+
                 </div>
-                <br><br>
-                <!-- END CAPTCHA -->
+            </div>
+            <br><br>
+            <!-- END CAPTCHA -->
 
-                <input type="submit" id="submit" value="Submit">
-                <input type="reset" id="reset">
-            </form>
-        </div>
-        <!--div for form ends -->
+            <input type="submit" id="submit" value="Submit">
+            <input type="reset" id="reset">
+        </form>
+    </div>
+    <!--div for form ends -->
 
-        <!-- To Link JS file-->
-        <script src="script.js"></script>
-    </body>
+    <!-- To Link JS file-->
+    <script src="script.js"></script>
+
+</body>
+
 </html>
