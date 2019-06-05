@@ -8,6 +8,7 @@
 
         <!-- To Link External Stylesheet-->
         <link rel="stylesheet" href="style.css">
+        
     </head>
     <body>
         <h1 id="heading"><b>Signup!!</b></h1>
@@ -55,92 +56,30 @@
 
                 <textarea rows="5" cols="19" class="edit" placeholder="Enter Comments(if any)"></textarea><br>
 
+                <!-- START CAPTCHA -->
+                Captcha<span>*</span><br>
+                <div class="capbox">
+
+                    <div id="CaptchaDiv"></div>
+
+                    <div class="capbox-inner">
+                        Type the above number:<br>
+
+                        <input type="hidden" id="txtCaptcha" value="testvalue">
+                        <input type="text" name="CaptchaInput" id="CaptchaInput" size="15"><br>
+
+                    </div>
+                </div>
+                <br><br>
+                <!-- END CAPTCHA -->
+
                 <input type="submit" id="submit" value="Submit">
                 <input type="reset" id="reset">
             </form>
         </div>
         <!--div for form ends -->
 
-        <!-- Script for Form Validation-->
-        <script>
-            function validate(thisform) {
-                var name = thisform.username.value;
-                var pass = thisform.password.value;
-                var cfpass = thisform.cfpassword.value;
-                var email = thisform.email.value;
-
-                // Validation for required fields should not be left empty
-                if(name=="" || name==null)
-                {
-                    window.alert("Please enter username");
-                    document.thisform.username.focus();
-                    return false;
-                }
-
-                if(pass=="" || pass==null)
-                {
-                    window.alert("Please enter password");
-                    document.thisform.password.focus();
-                    return false;
-                }
-
-                if(cfpass=="" || cfpass==null)
-                {
-                    window.alert("Please enter password again");
-                    document.thisform.cfpassword.focus();
-                    return false;
-                }
-
-                if(email=="" || email==null)
-                {
-                    window.alert("Please enter email address");
-                    document.thisform.email.focus();
-                    return false;
-                }
-
-                if(!thisform.s1.checked && !thisform.s2.checked && !thisform.s3.checked && !thisform.s4.checked && !thisform.s5.checked)
-                {
-                    window.alert("Please select at least one skill");
-                    return false;
-                }
-
-                //Validation for valid email
-                if (email.indexOf("@", 0) < 0)                 
-                { 
-                    window.alert("Please enter a valid e-mail address."); 
-                    document.thisform.email.focus(); 
-                    return false; 
-                }    
-   
-                if (email.indexOf(".", 0) < 0)                 
-                { 
-                    window.alert("Please enter a valid e-mail address."); 
-                    document.thisform.email.focus(); 
-                    return false; 
-                }
-
-                //Validation for length of password to be greater than 8
-                if(pass.length < 8)
-                {
-                    window.alert("Please enter at least 8 characters in password");
-                    document.thisform.password.focus();
-                    return false;
-                } 
-
-                if(cfpass.length < 8)
-                {
-                    window.alert("Please enter at least 8 characters in password");
-                    document.thisform.cfpassword.focus();
-                    return false;
-                } 
-
-                //Validation to check if both passwords are same or not
-                if(pass != cfpass) { 
-                    window.alert("Password did not match: Please try again...")
-                    document.thisform.cfpassword.focus();
-                    return false; 
-                } 
-            }
-        </script>
+        <!-- To Link JS file-->
+        <script src="script.js"></script>
     </body>
 </html>

@@ -65,3 +65,34 @@ input[type=checkbox], input[type=radio]{
 #reset:hover {
     background-color: rgb(187, 5, 5);
 }
+
+/* CSS for Captcha box*/
+.capbox {
+	background-color: rgb(21, 166, 233);
+	display: inline-block;
+    padding: 8px 40px 8px 8px;
+    margin-top: 6.5px;
+	}
+
+.capbox-inner {
+	font: bold 11px arial, sans-serif;
+	color: #000000;
+	background-color: rgb(90, 125, 241);
+	margin: 5px auto 0px auto;
+	padding: 3px;
+	border-radius: 4px;
+	}
+
+#CaptchaDiv {
+	font: bold 17px verdana, arial, sans-serif;
+	font-style: italic;
+	color: #000000;
+	background-color: #FFFFFF;
+	padding: 4px;
+	border-radius: 4px;
+	}
+
+#CaptchaInput { 
+    margin: 1px 0px 1px 0px; 
+    width: 135px; 
+}
