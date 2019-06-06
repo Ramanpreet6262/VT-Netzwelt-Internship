@@ -97,3 +97,12 @@ input[type=radio] {
     margin: 1px 0px 1px 0px;
     width: 135px;
 }
+
+.error_message {
+    color: red;
+    font-weight: bold;
+}
+
+#uname, #passw, #cfpassw, #mail, #skill, #cap {
+    display: none;
+}

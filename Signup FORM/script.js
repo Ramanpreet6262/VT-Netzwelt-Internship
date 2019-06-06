@@ -10,6 +10,13 @@ const pass_not_match = "Password did not match: Please try again...";
 const captcha_empty = "Please Enter CAPTCHA Code";
 const captcha_not_match = "The CAPTCHA Code Does Not Match";
 
+// Variables for generating Captcha code
+var a = Math.ceil(Math.random() * 9) + '';
+var b = Math.ceil(Math.random() * 9) + '';
+var c = Math.ceil(Math.random() * 9) + '';
+var d = Math.ceil(Math.random() * 9) + '';
+var e = Math.ceil(Math.random() * 9) + '';
+
 function validate(thisform) {
     var name = thisform.username.value;
     var pass = thisform.password.value;
@@ -18,63 +25,73 @@ function validate(thisform) {
 
     // Validation for required fields should not be left empty
     if (name == "" || name == null) {
-        window.alert(u_name_empty);
+        document.getElementById("uname").style.display = "block";
+        document.getElementById("uname").innerHTML = u_name_empty; 
         document.thisform.username.focus();
         return false;
     }
 
     if (pass == "" || pass == null) {
-        window.alert(pass_empty);
+        document.getElementById("passw").style.display = "block";
+        document.getElementById("passw").innerHTML = pass_empty; 
         document.thisform.password.focus();
         return false;
     }
 
     if (cfpass == "" || cfpass == null) {
-        window.alert(cf_pass_empty);
+        document.getElementById("cfpassw").style.display = "block";
+        document.getElementById("cfpassw").innerHTML = cf_pass_empty; 
         document.thisform.cfpassword.focus();
         return false;
     }
 
     if (email == "" || email == null) {
-        window.alert(email_empty);
+        document.getElementById("mail").style.display = "block";
+        document.getElementById("mail").innerHTML = email_empty; 
         document.thisform.email.focus();
         return false;
     }
 
     if (!thisform.s1.checked && !thisform.s2.checked && !thisform.s3.checked && !thisform.s4.checked && !thisform.s5.checked) {
-        window.alert(checkbox_empty);
+        document.getElementById("skill").style.display = "block";
+        document.getElementById("skill").innerHTML = checkbox_empty; 
         return false;
     }
 
     //Validation for valid email
     if (email.indexOf("@", 0) < 0) {
-        window.alert(email_invalid);
+        document.getElementById("mail").style.display = "block";
+        document.getElementById("mail").innerHTML = email_invalid;
         document.thisform.email.focus();
         return false;
     }
 
     if (email.indexOf(".", 0) < 0) {
-        window.alert(email_invalid);
+        document.getElementById("mail").style.display = "block";
+        document.getElementById("mail").innerHTML = email_invalid;
         document.thisform.email.focus();
         return false;
     }
 
     //Validation for length of password to be greater than 8
     if (pass.length < 8) {
-        window.alert(pass_length);
+        document.getElementById("passw").style.display = "block";
+        document.getElementById("passw").innerHTML = pass_length;
         document.thisform.password.focus();
         return false;
     }
 
     if (cfpass.length < 8) {
-        window.alert(pass_length);
+        document.getElementById("cfpassw").style.display = "block";
+        document.getElementById("cfpassw").innerHTML = pass_length;
         document.thisform.cfpassword.focus();
         return false;
     }
 
     //Validation to check if both passwords are same or not
     if (pass != cfpass) {
-        window.alert(pass_not_match);
+        document.getElementById("cfpassw").style.display = "block";
+        document.getElementById("cfpassw").innerHTML = pass_not_match;
         document.thisform.cfpassword.focus();
         return false;
     }
@@ -91,16 +108,11 @@ function validate(thisform) {
         }
     }
     if (why != "") {
-        alert(why);
+        document.getElementById("cap").style.display = "block";
+        document.getElementById("cap").innerHTML = why;
         return false;
     }
 }
-
-var a = Math.ceil(Math.random() * 9) + '';
-var b = Math.ceil(Math.random() * 9) + '';
-var c = Math.ceil(Math.random() * 9) + '';
-var d = Math.ceil(Math.random() * 9) + '';
-var e = Math.ceil(Math.random() * 9) + '';
 
 var code = a + b + c + d + e;
 document.getElementById("txtCaptcha").value = code;
