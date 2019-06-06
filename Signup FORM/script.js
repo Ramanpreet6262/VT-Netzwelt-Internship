@@ -22,40 +22,41 @@ function validate(thisform) {
     var pass = thisform.password.value;
     var cfpass = thisform.cfpassword.value;
     var email = thisform.email.value;
+    var flag = 0;
 
     // Validation for required fields should not be left empty
     if (name == "" || name == null) {
         document.getElementById("uname").style.display = "block";
         document.getElementById("uname").innerHTML = u_name_empty; 
         document.thisform.username.focus();
-        return false;
+        flag++;
     }
 
     if (pass == "" || pass == null) {
         document.getElementById("passw").style.display = "block";
         document.getElementById("passw").innerHTML = pass_empty; 
         document.thisform.password.focus();
-        return false;
+        flag++;
     }
 
     if (cfpass == "" || cfpass == null) {
         document.getElementById("cfpassw").style.display = "block";
         document.getElementById("cfpassw").innerHTML = cf_pass_empty; 
         document.thisform.cfpassword.focus();
-        return false;
+        flag++;
     }
 
     if (email == "" || email == null) {
         document.getElementById("mail").style.display = "block";
         document.getElementById("mail").innerHTML = email_empty; 
         document.thisform.email.focus();
-        return false;
+        flag++;
     }
 
     if (!thisform.s1.checked && !thisform.s2.checked && !thisform.s3.checked && !thisform.s4.checked && !thisform.s5.checked) {
         document.getElementById("skill").style.display = "block";
         document.getElementById("skill").innerHTML = checkbox_empty; 
-        return false;
+        flag++;
     }
 
     //Validation for valid email
@@ -63,14 +64,14 @@ function validate(thisform) {
         document.getElementById("mail").style.display = "block";
         document.getElementById("mail").innerHTML = email_invalid;
         document.thisform.email.focus();
-        return false;
+        flag++;
     }
 
     if (email.indexOf(".", 0) < 0) {
         document.getElementById("mail").style.display = "block";
         document.getElementById("mail").innerHTML = email_invalid;
         document.thisform.email.focus();
-        return false;
+        flag++;
     }
 
     //Validation for length of password to be greater than 8
@@ -78,14 +79,14 @@ function validate(thisform) {
         document.getElementById("passw").style.display = "block";
         document.getElementById("passw").innerHTML = pass_length;
         document.thisform.password.focus();
-        return false;
+        flag++;
     }
 
     if (cfpass.length < 8) {
         document.getElementById("cfpassw").style.display = "block";
         document.getElementById("cfpassw").innerHTML = pass_length;
         document.thisform.cfpassword.focus();
-        return false;
+        flag++;
     }
 
     //Validation to check if both passwords are same or not
@@ -93,7 +94,7 @@ function validate(thisform) {
         document.getElementById("cfpassw").style.display = "block";
         document.getElementById("cfpassw").innerHTML = pass_not_match;
         document.thisform.cfpassword.focus();
-        return false;
+        flag++;
     }
 
     // Captcha Script
@@ -110,6 +111,10 @@ function validate(thisform) {
     if (why != "") {
         document.getElementById("cap").style.display = "block";
         document.getElementById("cap").innerHTML = why;
+        flag++;
+    }
+
+    if(flag > 0) {
         return false;
     }
 }
