@@ -1,6 +1,5 @@
 body {
-    background-image: url(Images/img.jpg);
-    background-size: cover;
+   background-color: rgb(252, 246, 238);
 }
 
 #heading {
@@ -9,16 +8,24 @@ body {
     text-align: center;
 }
 
+#signup {
+    color: darkgreen;
+    font-size: 25px;
+    margin-top: -2.5%;
+    text-align: center;
+}
+
 span {
     color: red;
 }
 
 .form {
-    margin-left: 30%;
+    margin-left: 31.5%;
     margin-top: 30px;
-    background: rgba(192, 192, 192, 0.75);
+    background: rgba(160, 217, 243, 0.75);
     width: 35%;
     padding: 20px;
+    display: block;
 }
 
 /* To adjust div containing form on small screen sizes */
