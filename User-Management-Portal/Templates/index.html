@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Signup Form</title>
+
+    <!-- To make webpage responsive-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- To Link External Stylesheet-->
+    <link rel="stylesheet" href="../Assets/CSS/signup-form.css">
+    <link rel="stylesheet" href="../Assets/CSS/dashboard.css">
+
+</head>
+
+<body>
+    <h1 id="heading"><b>ZUES</b></h1>
+    
+    <!-- div for form starts-->
+    <div class="form">
+        <form name="thisform" onsubmit="return(validate(thisform))" method="POST">
+            <h3 id="signup">Signup!!</h3>
+            Username<span>*</span><br>
+            <input type="text" class="edit" name="username" placeholder="Username" required><br>
+            <p id="uname" class="error_message"></p>
+
+            Password<span>*</span><br>
+            <input type="password" class="edit" name="password" placeholder="Password" minlength="8" required><br>
+            <p id="passw" class="error_message"></p>
+
+            Confirm Password<span>*</span><br>
+            <input type="password" class="edit" name="cfpassword" placeholder="Re-enter Password" minlength="8"
+                required><br>
+            <p id="cfpassw" class="error_message"></p>
+
+            Email<span>*</span><br>
+            <input type="email" name="email" class="edit" placeholder="abc@gmail.com" required><br>
+            <br>
+            <p id="mail" class="error_message"></p>
+
+            Gender<span>*</span><br>
+            <input type="radio" name="gender" value="male" checked>Male<br>
+            <input type="radio" name="gender" value="female">Female<br>
+            <input type="radio" name="gender" value="other">Other<br>
+            <br>
+            
+            Skills<span>*</span><br>
+            <input type="checkbox" name="s1" value="python">Python<br>
+            <input type="checkbox" name="s2" value="java">Java<br>
+            <input type="checkbox" name="s3" value="javascript">JavaScript<br>
+            <input type="checkbox" name="s4" value="go">Go<br>
+            <input type="checkbox" name="s5" value="rails">Rails<br>
+            <br>
+            <p id="skill" class="error_message"></p>
+
+
+            Country<span>*</span><br>
+            <select value="" class="edit" name="country" required>
+                <option selected>India</option>
+                <option>United States of America</option>
+                <option>Canada</option>
+                <option>England</option>
+                <option>Other</option>
+            </select><br>
+
+            <input type="datetime-local" class="edit" name="date-time"><br>
+
+            <textarea rows="5" cols="19" class="edit" placeholder="Enter Comments(if any)"></textarea><br>
+
+            <!-- START CAPTCHA -->
+            Captcha<span>*</span><br>
+            <div class="capbox">
+
+                <div id="CaptchaDiv"></div>
+
+                <div class="capbox-inner">
+                    Type the above number:<br>
+
+                    <input type="hidden" id="txtCaptcha" value="testvalue">
+                    <input type="text" name="CaptchaInput" id="CaptchaInput" size="15" autocomplete="off"><br>
+
+                </div>
+            </div>
+            <br><br>
+            <p id="cap" class="error_message"></p>
+            <!-- END CAPTCHA -->
+
+            <input type="submit" id="submit" value="Submit">
+            <input type="reset" id="reset">
+        </form>
+    </div>
+    <!--div for form ends -->
+    
+     <!--div for dashboard page starts -->
+     <div id="dashboard">
+        <h2 id="signed-up-heading">Signed-Up Users</h2>
+    </div>
+    <!--div for dashboard page ends-->
+
+    <!-- To Link JS file-->
+    <script src="../Scripts/script.js"></script>
+
+</body>
+
+</html>
