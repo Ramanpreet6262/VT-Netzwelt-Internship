@@ -3,7 +3,6 @@ const u_name_empty = "Please enter username";
 const pass_empty = "Please enter password";
 const cf_pass_empty = "Please enter password again";
 const email_empty = "Please enter email address";
-const checkbox_empty = "Please select at least one skill";
 const email_invalid = "Please enter a valid e-mail address.";
 const pass_length = "Please enter at least 8 characters in password";
 const pass_not_match = "Password did not match: Please try again...";
@@ -17,89 +16,82 @@ var c = Math.ceil(Math.random() * 9) + '';
 var d = Math.ceil(Math.random() * 9) + '';
 var e = Math.ceil(Math.random() * 9) + '';
 
+//Captcha code generated
+var code = a + b + c + d + e;
+document.getElementById("txtCaptcha").value = code;
+document.getElementById("CaptchaDiv").innerHTML = code;
+
+var why = "";
+
+// To validate form
 function validate(thisform) {
     var name = thisform.username.value;
     var pass = thisform.password.value;
     var cfpass = thisform.cfpassword.value;
     var email = thisform.email.value;
+    var gender = thisform.gender.value;
+    var country = thisform.country.value;
     var flag = 0;
 
     // Validation for required fields should not be left empty
     if (name == "" || name == null) {
-        document.getElementById("uname").style.display = "block";
-        document.getElementById("uname").innerHTML = u_name_empty; 
+        errorMessage("uname", u_name_empty); 
         document.thisform.username.focus();
         flag++;
     }
 
     if (pass == "" || pass == null) {
-        document.getElementById("passw").style.display = "block";
-        document.getElementById("passw").innerHTML = pass_empty; 
+        errorMessage("passw", pass_empty); 
         document.thisform.password.focus();
         flag++;
     }
 
     if (cfpass == "" || cfpass == null) {
-        document.getElementById("cfpassw").style.display = "block";
-        document.getElementById("cfpassw").innerHTML = cf_pass_empty; 
+        errorMessage("cfpassw", cf_pass_empty); 
         document.thisform.cfpassword.focus();
         flag++;
     }
 
     if (email == "" || email == null) {
-        document.getElementById("mail").style.display = "block";
-        document.getElementById("mail").innerHTML = email_empty; 
+        errorMessage("mail", email_empty);
         document.thisform.email.focus();
-        flag++;
-    }
-
-    if (!thisform.s1.checked && !thisform.s2.checked && !thisform.s3.checked && !thisform.s4.checked && !thisform.s5.checked) {
-        document.getElementById("skill").style.display = "block";
-        document.getElementById("skill").innerHTML = checkbox_empty; 
         flag++;
     }
 
     //Validation for valid email
     if (email.indexOf("@", 0) < 0) {
-        document.getElementById("mail").style.display = "block";
-        document.getElementById("mail").innerHTML = email_invalid;
+        errorMessage("mail", email_invalid);
         document.thisform.email.focus();
         flag++;
     }
 
     if (email.indexOf(".", 0) < 0) {
-        document.getElementById("mail").style.display = "block";
-        document.getElementById("mail").innerHTML = email_invalid;
+        errorMessage("mail", email_invalid);
         document.thisform.email.focus();
         flag++;
     }
 
     //Validation for length of password to be greater than 8
     if (pass.length < 8) {
-        document.getElementById("passw").style.display = "block";
-        document.getElementById("passw").innerHTML = pass_length;
+        errorMessage("passw", pass_length);
         document.thisform.password.focus();
         flag++;
     }
 
     if (cfpass.length < 8) {
-        document.getElementById("cfpassw").style.display = "block";
-        document.getElementById("cfpassw").innerHTML = pass_length;
+        errorMessage("cfpassw", pass_length);
         document.thisform.cfpassword.focus();
         flag++;
     }
 
     //Validation to check if both passwords are same or not
     if (pass != cfpass) {
-        document.getElementById("cfpassw").style.display = "block";
-        document.getElementById("cfpassw").innerHTML = pass_not_match;
+        errorMessage("cfpassw", pass_not_match);
         document.thisform.cfpassword.focus();
         flag++;
     }
 
     // Captcha Script
-    var why = "";
-
     if (thisform.CaptchaInput.value == "") {
         why += captcha_empty;
     }
@@ -109,19 +101,18 @@ function validate(thisform) {
         }
     }
     if (why != "") {
-        document.getElementById("cap").style.display = "block";
-        document.getElementById("cap").innerHTML = why;
+        errorMessage("cap", why);
         flag++;
     }
 
     if(flag > 0) {
         return false;
     }
+    else if(flag == 0) {
+        storage(name, pass, email, gender, country);
+        return true;
+    }
 }
-
-var code = a + b + c + d + e;
-document.getElementById("txtCaptcha").value = code;
-document.getElementById("CaptchaDiv").innerHTML = code;
 
 // Validate input against the generated number
 function ValidCaptcha() {
@@ -137,4 +128,38 @@ function ValidCaptcha() {
 // Remove the spaces from the entered and generated code
 function removeSpaces(string) {
     return string.split(' ').join('');
+}
+
+// Display error messages in the form for invalid input
+function errorMessage(id , message) {
+    document.getElementById(id).style.display = "block";
+    document.getElementById(id).innerHTML = message;
+    setTimeout(function() {
+        document.getElementById(id).style.display = "none";
+    },5000);
+}
+
+function storage(name, pass, email, gender, country) {
+    document.getElementById("form").style.display = "none";
+    document.getElementById("dashboard").style.display = "block";
+
+    //Storing data
+    var data = {name : name, password : pass, email : email, gender : gender, country : country};
+    myJSON = JSON.stringify(data);
+    localStorage.setItem(name, myJSON);
+    
+    // // Retrieving data
+    // text = localStorage.getItem(name);
+    // obj = JSON.parse(text);
+    // document.getElementById("demo").innerHTML = obj.name + " " + obj.email + " " + obj.gender;
+}
+
+function resetForm(){
+    document.getElementById("form1").reset();
+}
+
+function logout() {
+    document.getElementById("dashboard").style.display = "none";
+    document.getElementById("form").style.display = "block";
+    resetForm();
 }

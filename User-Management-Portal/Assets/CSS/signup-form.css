@@ -1,8 +1,9 @@
 body {
-   background-color: rgb(252, 246, 238);
+   background-color: rgb(250, 241, 229);
 }
 
 #heading {
+    margin-top: 2%;
     color: darkblue;
     font-size: 45px;
     text-align: center;
@@ -13,25 +14,31 @@ body {
     font-size: 25px;
     margin-top: -2.5%;
     text-align: center;
+    font-weight: bold;
 }
 
 span {
     color: red;
 }
 
-.form {
-    margin-left: 31.5%;
+#form {
+    margin-left: 27.3%;
     margin-top: 30px;
+    margin-bottom: 5%;
     background: rgba(160, 217, 243, 0.75);
-    width: 35%;
+    width: 45%;
     padding: 20px;
+    display: block;
+}
+
+#dashboard {
     display: none;
 }
 
 /* To adjust div containing form on small screen sizes */
 @media screen and (max-width: 425px) {
-    .form {
-        margin-left: 10%;
+    #form {
+        margin-left: 15%;
         width: 70%;
     }
 }
@@ -43,7 +50,6 @@ span {
     margin-bottom: 10px;
 }
 
-input[type=checkbox],
 input[type=radio] {
     margin-top: 5px;
 }
@@ -110,6 +116,6 @@ input[type=radio] {
     font-weight: bold;
 }
 
-#uname, #passw, #cfpassw, #mail, #skill, #cap {
+#uname, #passw, #cfpassw, #mail, #cap {
     display: none;
 }

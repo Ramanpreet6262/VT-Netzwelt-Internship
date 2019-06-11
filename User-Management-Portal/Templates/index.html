@@ -2,103 +2,153 @@
 <html>
 
 <head>
-    <title>Signup Form</title>
+  <title>Signup Form</title>
 
-    <!-- To make webpage responsive-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- To make webpage responsive-->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- To Link External Stylesheet-->
-    <link rel="stylesheet" href="../Assets/CSS/signup-form.css">
-    <link rel="stylesheet" href="../Assets/CSS/dashboard.css">
+  <!-- To Link External Stylesheet and Scripts-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="../Assets/CSS/signup-form.css">
+  <link rel="stylesheet" href="../Assets/CSS/dashboard.css">
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
 
 </head>
 
 <body>
+  <div class="container">
     <h1 id="heading"><b>ZUES</b></h1>
-    
-    <!-- div for form starts-->
-    <div class="form">
-        <form name="thisform" onsubmit="return(validate(thisform))" method="POST">
-            <h3 id="signup">Signup!!</h3>
-            Username<span>*</span><br>
-            <input type="text" class="edit" name="username" placeholder="Username" required><br>
-            <p id="uname" class="error_message"></p>
 
-            Password<span>*</span><br>
-            <input type="password" class="edit" name="password" placeholder="Password" minlength="8" required><br>
-            <p id="passw" class="error_message"></p>
+    <!-- div for form starts -->
+    <div id="form">
+      <form id="form1" name="thisform" method="POST">
+        
+        <h3 id="signup">Signup!!</h3>
 
-            Confirm Password<span>*</span><br>
-            <input type="password" class="edit" name="cfpassword" placeholder="Re-enter Password" minlength="8"
-                required><br>
-            <p id="cfpassw" class="error_message"></p>
+        Username<span>*</span><br>
+        <input type="text" class="edit" name="username" placeholder="Username" required><br>
+        <p id="uname" class="error_message"></p>
 
-            Email<span>*</span><br>
-            <input type="email" name="email" class="edit" placeholder="abc@gmail.com" required><br>
-            <br>
-            <p id="mail" class="error_message"></p>
+        Password<span>*</span><br>
+        <input type="password" class="edit" name="password" placeholder="Password" minlength="8" required><br>
+        <p id="passw" class="error_message"></p>
 
-            Gender<span>*</span><br>
-            <input type="radio" name="gender" value="male" checked>Male<br>
-            <input type="radio" name="gender" value="female">Female<br>
-            <input type="radio" name="gender" value="other">Other<br>
-            <br>
-            
-            Skills<span>*</span><br>
-            <input type="checkbox" name="s1" value="python">Python<br>
-            <input type="checkbox" name="s2" value="java">Java<br>
-            <input type="checkbox" name="s3" value="javascript">JavaScript<br>
-            <input type="checkbox" name="s4" value="go">Go<br>
-            <input type="checkbox" name="s5" value="rails">Rails<br>
-            <br>
-            <p id="skill" class="error_message"></p>
+        Confirm Password<span>*</span><br>
+        <input type="password" class="edit" name="cfpassword" placeholder="Re-enter Password" minlength="8"
+          required><br>
+        <p id="cfpassw" class="error_message"></p>
 
+        Email<span>*</span><br>
+        <input type="email" name="email" class="edit" placeholder="abc@gmail.com" required><br>
+        <br>
+        <p id="mail" class="error_message"></p>
 
-            Country<span>*</span><br>
-            <select value="" class="edit" name="country" required>
-                <option selected>India</option>
-                <option>United States of America</option>
-                <option>Canada</option>
-                <option>England</option>
-                <option>Other</option>
-            </select><br>
+        Gender<span>*</span><br>
+        <input type="radio" name="gender" value="male" checked>Male<br>
+        <input type="radio" name="gender" value="female">Female<br>
+        <input type="radio" name="gender" value="other">Other<br>
+        <br>
 
-            <input type="datetime-local" class="edit" name="date-time"><br>
+        Country<span>*</span><br>
+        <select value="" class="edit" name="country" required>
+          <option selected>India</option>
+          <option>United States of America</option>
+          <option>Canada</option>
+          <option>England</option>
+          <option>Other</option>
+        </select><br>
 
-            <textarea rows="5" cols="19" class="edit" placeholder="Enter Comments(if any)"></textarea><br>
+        <!-- START CAPTCHA -->
+        Captcha<span>*</span><br>
+        <div class="capbox">
 
-            <!-- START CAPTCHA -->
-            Captcha<span>*</span><br>
-            <div class="capbox">
+          <div id="CaptchaDiv"></div>
 
-                <div id="CaptchaDiv"></div>
+          <div class="capbox-inner">
+            Type the above number:<br>
 
-                <div class="capbox-inner">
-                    Type the above number:<br>
+            <input type="hidden" id="txtCaptcha" value="testvalue">
+            <input type="text" name="CaptchaInput" id="CaptchaInput" size="15" autocomplete="off"><br>
 
-                    <input type="hidden" id="txtCaptcha" value="testvalue">
-                    <input type="text" name="CaptchaInput" id="CaptchaInput" size="15" autocomplete="off"><br>
+          </div>
+        </div>
+        <br><br>
+        <p id="cap" class="error_message"></p>
+        <!-- END CAPTCHA -->
 
-                </div>
-            </div>
-            <br><br>
-            <p id="cap" class="error_message"></p>
-            <!-- END CAPTCHA -->
-
-            <input type="submit" id="submit" value="Submit">
-            <input type="reset" id="reset">
-        </form>
+        <input type="button" id="submit" value="Submit" onclick="return(validate(thisform))">
+      </form>
     </div>
     <!--div for form ends -->
-    
-     <!--div for dashboard page starts -->
-     <div id="dashboard">
-        <h2 id="signed-up-heading">Signed-Up Users</h2>
-    </div>
-    <!--div for dashboard page ends-->
 
-    <!-- To Link JS file-->
-    <script src="../Scripts/script.js"></script>
+
+    <!--div for dashboard page starts -->
+    <div id="dashboard">
+      <h2 id="signed-up-heading">Signed-Up Users</h2>
+      <input type="button" id="logout" value="Logout" onclick="logout()">
+
+      <div id="signtable" class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Username</th>
+            <th scope="col">Email</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Country</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">4</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+            <td>@mdo</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- <p id="demo"></p> -->
+    </div> 
+    <!--div for dashboard page ends-->
+  </div>
+
+
+  <!-- To Link JS file-->
+  <script src="../Scripts/script.js"></script>
 
 </body>
 
