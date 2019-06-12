@@ -24,16 +24,20 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
   </script>
 
+  <!-- To link icons -->
+  <link rel="stylesheet" href="../Assets/Icons/font-awesome-4.7.0/css/font-awesome.min.css">
+
 </head>
 
 <body>
   <div class="container">
+
     <h1 id="heading"><b>ZUES</b></h1>
 
     <!-- div for form starts -->
     <div id="form">
       <form id="form1" name="thisform" method="POST">
-        
+
         <h3 id="signup">Signup!!</h3>
 
         Username<span>*</span><br>
@@ -99,51 +103,46 @@
       <input type="button" id="logout" value="Logout" onclick="logout()">
 
       <div id="signtable" class="table-responsive">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Username</th>
-            <th scope="col">Email</th>
-            <th scope="col">Gender</th>
-            <th scope="col">Country</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">4</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-            <td>@mdo</td>
-          </tr>
-        </tbody>
-      </table>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Username</th>
+              <th scope="col">Email</th>
+              <th scope="col">Gender</th>
+              <th scope="col">Country</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+          </tbody>
+        </table>
+      </div>
+
     </div>
-    <!-- <p id="demo"></p> -->
-    </div> 
     <!--div for dashboard page ends-->
+
+    <!-- div for delete modal starts-->
+    <div class="modal" id="myModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Delete User</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeModal()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure, you want to delete user?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeModal()">Cancel</button>
+            <button type="button" class="btn btn-primary" onclick="deleteData()">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- div for delete modal ends-->
+
   </div>
 
 

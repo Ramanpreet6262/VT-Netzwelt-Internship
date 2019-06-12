@@ -10,18 +10,31 @@ const captcha_empty = "Please Enter CAPTCHA Code";
 const captcha_not_match = "The CAPTCHA Code Does Not Match";
 
 // Variables for generating Captcha code
-var a = Math.ceil(Math.random() * 9) + '';
-var b = Math.ceil(Math.random() * 9) + '';
-var c = Math.ceil(Math.random() * 9) + '';
-var d = Math.ceil(Math.random() * 9) + '';
-var e = Math.ceil(Math.random() * 9) + '';
+var num1 = Math.ceil(Math.random() * 9) + '';
+var num2 = Math.ceil(Math.random() * 9) + '';
+var num3 = Math.ceil(Math.random() * 9) + '';
+var num4 = Math.ceil(Math.random() * 9) + '';
+var num5 = Math.ceil(Math.random() * 9) + '';
 
 //Captcha code generated
-var code = a + b + c + d + e;
+var code = num1 + num2 + num3 + num4 + num5;
 document.getElementById("txtCaptcha").value = code;
 document.getElementById("CaptchaDiv").innerHTML = code;
 
 var why = "";
+
+var storageKeys = [];
+
+var obj = {};
+var arrKeys = [];
+var keys = "";
+var myJSON = "";
+var myJSON1 = "";
+var text = "";
+var struc = "";
+var tr = "";
+var ic = "";
+var icon = "";
 
 // To validate form
 function validate(thisform) {
@@ -35,19 +48,19 @@ function validate(thisform) {
 
     // Validation for required fields should not be left empty
     if (name == "" || name == null) {
-        errorMessage("uname", u_name_empty); 
+        errorMessage("uname", u_name_empty);
         document.thisform.username.focus();
         flag++;
     }
 
     if (pass == "" || pass == null) {
-        errorMessage("passw", pass_empty); 
+        errorMessage("passw", pass_empty);
         document.thisform.password.focus();
         flag++;
     }
 
     if (cfpass == "" || cfpass == null) {
-        errorMessage("cfpassw", cf_pass_empty); 
+        errorMessage("cfpassw", cf_pass_empty);
         document.thisform.cfpassword.focus();
         flag++;
     }
@@ -105,10 +118,9 @@ function validate(thisform) {
         flag++;
     }
 
-    if(flag > 0) {
+    if (flag > 0) {
         return false;
-    }
-    else if(flag == 0) {
+    } else if (flag == 0) {
         storage(name, pass, email, gender, country);
         return true;
     }
@@ -131,12 +143,12 @@ function removeSpaces(string) {
 }
 
 // Display error messages in the form for invalid input
-function errorMessage(id , message) {
+function errorMessage(id, message) {
     document.getElementById(id).style.display = "block";
     document.getElementById(id).innerHTML = message;
-    setTimeout(function() {
+    setTimeout(function () {
         document.getElementById(id).style.display = "none";
-    },5000);
+    }, 5000);
 }
 
 function storage(name, pass, email, gender, country) {
@@ -144,17 +156,84 @@ function storage(name, pass, email, gender, country) {
     document.getElementById("dashboard").style.display = "block";
 
     //Storing data
-    var data = {name : name, password : pass, email : email, gender : gender, country : country};
+    var data = {
+        name: name,
+        password: pass,
+        email: email,
+        gender: gender,
+        country: country
+    };
     myJSON = JSON.stringify(data);
     localStorage.setItem(name, myJSON);
-    
-    // // Retrieving data
-    // text = localStorage.getItem(name);
-    // obj = JSON.parse(text);
-    // document.getElementById("demo").innerHTML = obj.name + " " + obj.email + " " + obj.gender;
+
+    //Getting keys to retrieve data
+    if (localStorage.getItem("keys") === null) {
+        storageKeys.push(name);
+        myJSON1 = JSON.stringify(storageKeys);
+        localStorage.setItem("keys", myJSON1);
+        keys = localStorage.getItem("keys");
+        arrKeys = JSON.parse(keys);
+    } else {
+        keys = localStorage.getItem("keys");
+        arrKeys = JSON.parse(keys);
+        arrKeys.push(name);
+        myJSON1 = JSON.stringify(arrKeys);
+        localStorage.setItem("keys", myJSON1);
+    }
+
+    struc = document.getElementById("tbody");
+
+    // Retrieving data
+    for (var i = 0; i < arrKeys.length; i++) {
+        text = localStorage.getItem(arrKeys[i]);
+        obj = JSON.parse(text);
+
+        //Showing data on Dashboard page
+        tr = document.createElement("tr");
+        createRow(obj, name);
+        struc.appendChild(tr);
+    }
 }
 
-function resetForm(){
+function createRow(obj, name) {
+    createContent(obj.name);
+    createContent(obj.email);
+    createContent(obj.gender);
+    createContent(obj.country);
+    createActions(obj, name);
+}
+
+function createContent(text) {
+    var td = document.createElement("td");
+    var content = document.createTextNode(text);
+    td.appendChild(content);
+    tr.appendChild(td);
+}
+
+function createActions(obj, name) {
+    if (obj.name == name) {
+        ic = document.createElement("td");
+        createIcons("fa fa-pencil", "pencil", "edit()", obj.name);
+        createIcons("fa fa-trash", "trashdisabled");
+        tr.appendChild(ic);
+    } else {
+        ic = document.createElement("td");
+        createIcons("fa fa-pencil", "pencil", "edit()", obj.name);
+        createIcons("fa fa-trash", "trash", "deleteModal()", obj.name);
+        tr.appendChild(ic);
+    }
+}
+
+function createIcons(clas, idd, func, name) {
+    icon = document.createElement("i");
+    icon.setAttribute("class", clas);
+    icon.setAttribute("id", idd);
+    icon.setAttribute("onclick", func);
+    icon.setAttribute("name", name);
+    ic.appendChild(icon);
+}
+
+function resetForm() {
     document.getElementById("form1").reset();
 }
 
@@ -162,4 +241,26 @@ function logout() {
     document.getElementById("dashboard").style.display = "none";
     document.getElementById("form").style.display = "block";
     resetForm();
+}
+
+function edit() {
+    alert("edit!!!!");
+}
+
+function deleteModal() {
+    document.getElementById("myModal").style.display = "block";
+}
+
+function closeModal() {
+    document.getElementById("myModal").style.display = "none";
+}
+
+window.onclick = function (event) {
+    if (event.target == document.getElementById("myModal")) {
+        document.getElementById("myModal").style.display = "none";
+    }
+}
+
+function deleteData() {
+
 }

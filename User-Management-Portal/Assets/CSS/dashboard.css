@@ -30,3 +30,26 @@
 #signtable {
     margin-top: 5%;
 }
+
+#pencil, #trash {
+    padding: 5px;
+    cursor: pointer;
+}
+
+#pencil:hover {
+    color: rgb(56, 161, 88);
+}
+
+#trash:hover {
+    color: red;
+}
+
+#trashdisabled {
+    padding: 5px;
+    cursor: pointer;
+    color: grey;
+}
+
+#myModal {
+    display: none;
+}
