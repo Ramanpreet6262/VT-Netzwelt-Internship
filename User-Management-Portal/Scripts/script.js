@@ -1,5 +1,6 @@
 // Constants for storing different messages
 const u_name_empty = "Please enter username";
+const u_name_duplicate = "This username already exists. Please try again!";
 const pass_empty = "Please enter password";
 const cf_pass_empty = "Please enter password again";
 const email_empty = "Please enter email address";
@@ -25,6 +26,7 @@ var why = "";
 
 var storageKeys = [];
 
+var dashboardTable = {};
 var obj = {};
 var arrKeys = [];
 var keys = "";
@@ -69,6 +71,19 @@ function validate(thisform) {
         errorMessage("mail", email_empty);
         document.thisform.email.focus();
         flag++;
+    }
+
+    //Validation for username should be always unique
+    if (!(localStorage.getItem("keys") === null)) {
+        var keys1 = localStorage.getItem("keys");
+        var arrKeys1 = JSON.parse(keys1);
+        for (var i = 0; i < arrKeys1.length; i++) {
+            if (name == arrKeys1[i]) {
+                errorMessage("uname", u_name_duplicate);
+                document.thisform.username.focus();
+                flag++;
+            }
+        }
     }
 
     //Validation for valid email
@@ -181,8 +196,15 @@ function storage(name, pass, email, gender, country) {
         localStorage.setItem("keys", myJSON1);
     }
 
-    struc = document.getElementById("tbody");
+    retrieveData(arrKeys, name);
+    dashboardTable.appendChild(struc);
 
+}
+
+function retrieveData(arrKeys, name) {
+    dashboardTable = document.getElementById("dashboardTable");
+    struc = document.createElement("tbody");
+    struc.setAttribute("id", "tbody");
     // Retrieving data
     for (var i = 0; i < arrKeys.length; i++) {
         text = localStorage.getItem(arrKeys[i]);
@@ -213,23 +235,23 @@ function createContent(text) {
 function createActions(obj, name) {
     if (obj.name == name) {
         ic = document.createElement("td");
-        createIcons("fa fa-pencil", "pencil", "edit()", obj.name);
+        createIcons("fa fa-pencil", "pencil", "edit('" + obj.name + "')", obj.name);
         createIcons("fa fa-trash", "trashdisabled");
         tr.appendChild(ic);
     } else {
         ic = document.createElement("td");
-        createIcons("fa fa-pencil", "pencil", "edit()", obj.name);
-        createIcons("fa fa-trash", "trash", "deleteModal()", obj.name);
+        createIcons("fa fa-pencil", "pencil", "edit('" + obj.name + "')", obj.name);
+        createIcons("fa fa-trash", "trash", "deleteModal('" + obj.name + "')", obj.name);
         tr.appendChild(ic);
     }
 }
 
-function createIcons(clas, idd, func, name) {
+function createIcons(clas, idd, func, oname) {
     icon = document.createElement("i");
     icon.setAttribute("class", clas);
     icon.setAttribute("id", idd);
     icon.setAttribute("onclick", func);
-    icon.setAttribute("name", name);
+    icon.setAttribute("name", oname);
     ic.appendChild(icon);
 }
 
@@ -241,13 +263,16 @@ function logout() {
     document.getElementById("dashboard").style.display = "none";
     document.getElementById("form").style.display = "block";
     resetForm();
+    window.location.reload();
 }
 
-function edit() {
-    alert("edit!!!!");
+function edit(oname) {
+    alert(oname);
 }
 
-function deleteModal() {
+function deleteModal(oname) {
+    var button = document.getElementById("deleteText");
+    button.setAttribute("name", oname);
     document.getElementById("myModal").style.display = "block";
 }
 
@@ -261,6 +286,26 @@ window.onclick = function (event) {
     }
 }
 
-function deleteData() {
+function deleteData(oname) {
+    localStorage.removeItem(oname);
+    deleteStorage(oname);
+    document.getElementById("myModal").style.display = "none";
+}
 
+function deleteStorage(oname) {
+    var keys1 = localStorage.getItem("keys");
+    var arrKeys1 = JSON.parse(keys1);
+    var index = arrKeys1.indexOf(oname);
+    arrKeys1.splice(index, 1);
+    var myJSON2 = JSON.stringify(arrKeys1);
+    localStorage.setItem("keys", myJSON2);
+
+    var parent = document.getElementById("dashboardTable");
+    var child = document.getElementById("tbody");
+    parent.removeChild(child);
+
+    var loggedInUser = arrKeys1[arrKeys1.length - 1];
+    retrieveData(arrKeys1, loggedInUser);
+    dashboardTable.appendChild(struc);
+    console.log("hogia !!!!");
 }

@@ -103,7 +103,7 @@
       <input type="button" id="logout" value="Logout" onclick="logout()">
 
       <div id="signtable" class="table-responsive">
-        <table class="table table-striped">
+        <table class="table table-striped" id="dashboardTable">
           <thead>
             <tr>
               <th scope="col">Username</th>
@@ -113,8 +113,6 @@
               <th scope="col">Actions</th>
             </tr>
           </thead>
-          <tbody id="tbody">
-          </tbody>
         </table>
       </div>
 
@@ -136,7 +134,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeModal()">Cancel</button>
-            <button type="button" class="btn btn-primary" onclick="deleteData()">Delete</button>
+            <button type="button" class="btn btn-primary" id="deleteText" onclick="deleteData(this.name)">Delete</button>
           </div>
         </div>
       </div>
