@@ -35,6 +35,10 @@ span {
     display: none;
 }
 
+#editPage {
+    display: none;
+}
+
 /* To adjust div containing form on small screen sizes */
 @media screen and (max-width: 425px) {
     #form {

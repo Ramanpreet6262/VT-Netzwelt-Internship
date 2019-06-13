@@ -7,12 +7,16 @@
   <!-- To make webpage responsive-->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+  <!-- To link icons -->
+  <link rel="stylesheet" href="../Assets/Icons/font-awesome-4.7.0/css/font-awesome.min.css">
+
   <!-- To Link External Stylesheet and Scripts-->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
   <link rel="stylesheet" href="../Assets/CSS/signup-form.css">
   <link rel="stylesheet" href="../Assets/CSS/dashboard.css">
+  <link rel="stylesheet" href="../Assets/CSS/editPage.css">
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
@@ -23,9 +27,6 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
   </script>
-
-  <!-- To link icons -->
-  <link rel="stylesheet" href="../Assets/Icons/font-awesome-4.7.0/css/font-awesome.min.css">
 
 </head>
 
@@ -140,6 +141,47 @@
       </div>
     </div>
     <!-- div for delete modal ends-->
+
+    <!-- div for edit page starts -->
+    <div id="editPage">
+      <h2 id="editHeading">Edit User Info</h2>
+
+      <div id="editUserForm">
+        <form id="editForm" name="editUserForm" method="POST">
+            Username<br>
+            <input type="text" class="editUser" name="editUsername" value="" required><br>
+            <p id="editUname" class="editErrorMessage"></p>
+    
+            Password<br>
+            <input type="password" class="editUser" placeholder="**********" disabled><br>
+    
+            Email<br>
+            <input type="email" name="editEmail" class="editUser" value="" required><br>
+            <p id="editEmail" class="editErrorMessage"></p>
+            <br>
+    
+            Gender<br>
+            <input type="radio" name="editGender" value="male" id="male" checked>Male<br>
+            <input type="radio" name="editGender" value="female" id="female">Female<br>
+            <input type="radio" name="editGender" value="other" id="other">Other<br>
+            <br>
+    
+            Country<br>
+            <select value="" class="editUser" name="editCountry" required>
+              <option>India</option>
+              <option>United States of America</option>
+              <option>Canada</option>
+              <option>England</option>
+              <option>Other</option>
+            </select><br>
+            <br>
+
+            <input type="button" id="saveInfo" value="Save Info" onclick="return(save(editUserForm, this.name))">
+
+        </form>
+      </div>
+    </div>
+    <!-- div for edit page ends -->
 
   </div>
 

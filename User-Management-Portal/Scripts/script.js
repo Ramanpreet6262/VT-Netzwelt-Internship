@@ -267,7 +267,27 @@ function logout() {
 }
 
 function edit(oname) {
-    alert(oname);
+    document.getElementById("dashboard").style.display = "none";
+    document.getElementById("editPage").style.display = "block";
+
+    var buttonName = document.getElementById("saveInfo");
+    buttonName.setAttribute("name", oname);
+
+    var userData = localStorage.getItem(oname);
+    var userobj = JSON.parse(userData);
+    fillData(userobj);
+}
+
+function fillData(userobj) {
+    fillFields("editUsername", userobj.name);
+    fillFields("editEmail", userobj.email);
+    fillFields("editCountry", userobj.country);
+    document.getElementById(userobj.gender).checked = true;
+}
+
+function fillFields(fieldName, fieldValue) {
+    var field = document.getElementsByName(fieldName)[0];
+    field.value = fieldValue;
 }
 
 function deleteModal(oname) {
@@ -307,5 +327,97 @@ function deleteStorage(oname) {
     var loggedInUser = arrKeys1[arrKeys1.length - 1];
     retrieveData(arrKeys1, loggedInUser);
     dashboardTable.appendChild(struc);
-    console.log("hogia !!!!");
+}
+
+function save(editUserForm, oldName) {
+    var updateName = editUserForm.editUsername.value;
+    var updateEmail = editUserForm.editEmail.value;
+    var updateGender = editUserForm.editGender.value;
+    var updateCountry = editUserForm.editCountry.value;
+    var check = 0;
+
+    // Validation for required fields should not be left empty
+    if (updateName == "" || updateName == null) {
+        errorMessage("editUname", u_name_empty);
+        document.editUserForm.editUsername.focus();
+        check++;
+    }
+
+    if (updateEmail == "" || updateEmail == null) {
+        errorMessage("editEmail", email_empty);
+        document.editUserForm.editEmail.focus();
+        check++;
+    }
+
+    //Validation for valid email
+    if (updateEmail.indexOf("@", 0) < 0) {
+        errorMessage("editEmail", email_invalid);
+        document.editUserForm.editEmail.focus();
+        check++;
+    }
+
+    if (updateEmail.indexOf(".", 0) < 0) {
+        errorMessage("editEmail", email_invalid);
+        document.editUserForm.editEmail.focus();
+        check++;
+    }
+
+    //Validation for username should be always unique
+    var keys1 = localStorage.getItem("keys");
+    var arrKeys1 = JSON.parse(keys1);
+    for (var i = 0; i < arrKeys1.length; i++) {
+        if (updateName == arrKeys1[i]) {
+            errorMessage("editUname", u_name_duplicate);
+            document.editUserForm.editUsername.focus();
+            check++;
+        }
+    }
+
+    if (check > 0) {
+        return false;
+    } else if (check == 0) {
+        editInfo(oldName, updateName, updateEmail, updateGender, updateCountry);
+        return true;
+    }
+
+}
+
+function editInfo(oldName, updateName, updateEmail, updateGender, updateCountry) {
+    var userData = localStorage.getItem(oldName);
+    var userobj = JSON.parse(userData);
+    var oldPassword = userobj.password;
+
+    localStorage.removeItem(oldName);
+
+    var userInfo = {
+        name: updateName,
+        password: oldPassword,
+        email: updateEmail,
+        gender: updateGender,
+        country: updateCountry
+    };
+    
+    var myJSON3 = JSON.stringify(userInfo);
+    localStorage.setItem(updateName, myJSON3);
+
+    updateStorage(oldName, updateName);
+    document.getElementById("editPage").style.display = "none";
+    document.getElementById("dashboard").style.display = "block";
+}
+
+function updateStorage(oldName, updateName) {
+    var keys1 = localStorage.getItem("keys");
+    var arrKeys1 = JSON.parse(keys1);
+    var index = arrKeys1.indexOf(oldName);
+    arrKeys1[index] = updateName;
+    var myJSON2 = JSON.stringify(arrKeys1);
+    localStorage.setItem("keys", myJSON2);
+
+    var parent = document.getElementById("dashboardTable");
+    var child = document.getElementById("tbody");
+    parent.removeChild(child);
+
+    var loggedInUser = arrKeys1[arrKeys1.length - 1];
+    retrieveData(arrKeys1, loggedInUser);
+    dashboardTable.appendChild(struc);
 }
