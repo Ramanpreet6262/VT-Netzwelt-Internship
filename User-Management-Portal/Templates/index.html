@@ -135,7 +135,8 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeModal()">Cancel</button>
-            <button type="button" class="btn btn-primary" id="deleteText" onclick="deleteData(this.name)">Delete</button>
+            <button type="button" class="btn btn-primary" id="deleteText"
+              onclick="deleteData(this.name)">Delete</button>
           </div>
         </div>
       </div>
@@ -148,40 +149,50 @@
 
       <div id="editUserForm">
         <form id="editForm" name="editUserForm" method="POST">
-            Username<br>
-            <input type="text" class="editUser" name="editUsername" value="" required><br>
-            <p id="editUname" class="editErrorMessage"></p>
-    
-            Password<br>
-            <input type="password" class="editUser" placeholder="**********" disabled><br>
-    
-            Email<br>
-            <input type="email" name="editEmail" class="editUser" value="" required><br>
-            <p id="editEmail" class="editErrorMessage"></p>
-            <br>
-    
-            Gender<br>
-            <input type="radio" name="editGender" value="male" id="male" checked>Male<br>
-            <input type="radio" name="editGender" value="female" id="female">Female<br>
-            <input type="radio" name="editGender" value="other" id="other">Other<br>
-            <br>
-    
-            Country<br>
-            <select value="" class="editUser" name="editCountry" required>
-              <option>India</option>
-              <option>United States of America</option>
-              <option>Canada</option>
-              <option>England</option>
-              <option>Other</option>
-            </select><br>
-            <br>
+          Username<br>
+          <input type="text" class="editUser" name="editUsername" value="" disabled><br>
 
-            <input type="button" id="saveInfo" value="Save Info" onclick="return(save(editUserForm, this.name))">
+          Password<br>
+          <input type="password" class="editUser" placeholder="**********" disabled><br>
+
+          Email<br>
+          <input type="email" name="editEmail" class="editUser" value="" required><br>
+          <p id="editEmail" class="editErrorMessage"></p>
+          <br>
+
+          Gender<br>
+          <input type="radio" name="editGender" value="male" id="male" checked>Male<br>
+          <input type="radio" name="editGender" value="female" id="female">Female<br>
+          <input type="radio" name="editGender" value="other" id="other">Other<br>
+          <br>
+
+          Country<br>
+          <select value="" class="editUser" name="editCountry" required>
+            <option>India</option>
+            <option>United States of America</option>
+            <option>Canada</option>
+            <option>England</option>
+            <option>Other</option>
+          </select><br>
+          <br>
+
+          <input type="button" id="saveInfo" value="Save Info" onclick="return(save(editUserForm))">
 
         </form>
       </div>
     </div>
     <!-- div for edit page ends -->
+
+    <!-- div for loader starts -->
+    <div id="loader">
+      <div class="d-flex justify-content-center">
+        <div class="spinner-border text-info" style="width: 3rem; height: 3rem;" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- div for loader ends -->
 
   </div>
 

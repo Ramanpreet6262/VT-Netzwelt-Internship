@@ -33,7 +33,7 @@
     font-weight: bold;
 }
 
-#editUname, #editEmail {
+#editEmail {
     display: none;
 }
 

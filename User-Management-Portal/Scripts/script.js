@@ -168,7 +168,7 @@ function errorMessage(id, message) {
 
 function storage(name, pass, email, gender, country) {
     document.getElementById("form").style.display = "none";
-    document.getElementById("dashboard").style.display = "block";
+    loader();
 
     //Storing data
     var data = {
@@ -270,9 +270,6 @@ function edit(oname) {
     document.getElementById("dashboard").style.display = "none";
     document.getElementById("editPage").style.display = "block";
 
-    var buttonName = document.getElementById("saveInfo");
-    buttonName.setAttribute("name", oname);
-
     var userData = localStorage.getItem(oname);
     var userobj = JSON.parse(userData);
     fillData(userobj);
@@ -320,34 +317,19 @@ function deleteStorage(oname) {
     var myJSON2 = JSON.stringify(arrKeys1);
     localStorage.setItem("keys", myJSON2);
 
-    var parent = document.getElementById("dashboardTable");
-    var child = document.getElementById("tbody");
-    parent.removeChild(child);
-
+    deleteDashboardContent();
+    
     var loggedInUser = arrKeys1[arrKeys1.length - 1];
     retrieveData(arrKeys1, loggedInUser);
     dashboardTable.appendChild(struc);
 }
 
-function save(editUserForm, oldName) {
-    var updateName = editUserForm.editUsername.value;
+function save(editUserForm) {
+    var originalName = editUserForm.editUsername.value;
     var updateEmail = editUserForm.editEmail.value;
     var updateGender = editUserForm.editGender.value;
     var updateCountry = editUserForm.editCountry.value;
     var check = 0;
-
-    // Validation for required fields should not be left empty
-    if (updateName == "" || updateName == null) {
-        errorMessage("editUname", u_name_empty);
-        document.editUserForm.editUsername.focus();
-        check++;
-    }
-
-    if (updateEmail == "" || updateEmail == null) {
-        errorMessage("editEmail", email_empty);
-        document.editUserForm.editEmail.focus();
-        check++;
-    }
 
     //Validation for valid email
     if (updateEmail.indexOf("@", 0) < 0) {
@@ -362,62 +344,51 @@ function save(editUserForm, oldName) {
         check++;
     }
 
-    //Validation for username should be always unique
-    var keys1 = localStorage.getItem("keys");
-    var arrKeys1 = JSON.parse(keys1);
-    for (var i = 0; i < arrKeys1.length; i++) {
-        if (updateName == arrKeys1[i]) {
-            errorMessage("editUname", u_name_duplicate);
-            document.editUserForm.editUsername.focus();
-            check++;
-        }
-    }
-
     if (check > 0) {
         return false;
     } else if (check == 0) {
-        editInfo(oldName, updateName, updateEmail, updateGender, updateCountry);
+        editInfo(originalName, updateEmail, updateGender, updateCountry);
         return true;
     }
 
 }
 
-function editInfo(oldName, updateName, updateEmail, updateGender, updateCountry) {
-    var userData = localStorage.getItem(oldName);
+function editInfo(originalName, updateEmail, updateGender, updateCountry) {
+    var userData = localStorage.getItem(originalName);
     var userobj = JSON.parse(userData);
-    var oldPassword = userobj.password;
 
-    localStorage.removeItem(oldName);
+    userobj.email = updateEmail;
+    userobj.gender = updateGender;
+    userobj.country = updateCountry;
 
-    var userInfo = {
-        name: updateName,
-        password: oldPassword,
-        email: updateEmail,
-        gender: updateGender,
-        country: updateCountry
-    };
-    
-    var myJSON3 = JSON.stringify(userInfo);
-    localStorage.setItem(updateName, myJSON3);
+    var myJSON3 = JSON.stringify(userobj);
+    localStorage.setItem(originalName, myJSON3);
 
-    updateStorage(oldName, updateName);
-    document.getElementById("editPage").style.display = "none";
-    document.getElementById("dashboard").style.display = "block";
-}
+    deleteDashboardContent();
 
-function updateStorage(oldName, updateName) {
     var keys1 = localStorage.getItem("keys");
     var arrKeys1 = JSON.parse(keys1);
-    var index = arrKeys1.indexOf(oldName);
-    arrKeys1[index] = updateName;
-    var myJSON2 = JSON.stringify(arrKeys1);
-    localStorage.setItem("keys", myJSON2);
-
-    var parent = document.getElementById("dashboardTable");
-    var child = document.getElementById("tbody");
-    parent.removeChild(child);
 
     var loggedInUser = arrKeys1[arrKeys1.length - 1];
     retrieveData(arrKeys1, loggedInUser);
     dashboardTable.appendChild(struc);
+
+    document.getElementById("editPage").style.display = "none";
+    loader();
+}
+
+function loader() {
+    document.getElementById("heading").style.display = "none";
+    document.getElementById("loader").style.display = "block";
+    setTimeout(function () {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("heading").style.display = "block";
+        document.getElementById("dashboard").style.display = "block";
+    }, 1500);
+}
+
+function deleteDashboardContent() {
+    var parent = document.getElementById("dashboardTable");
+    var child = document.getElementById("tbody");
+    parent.removeChild(child);
 }
