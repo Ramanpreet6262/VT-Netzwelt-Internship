@@ -10,15 +10,7 @@ const pass_not_match = "Password did not match: Please try again...";
 const captcha_empty = "Please Enter CAPTCHA Code";
 const captcha_not_match = "The CAPTCHA Code Does Not Match";
 
-// Variables for generating Captcha code
-var num1 = Math.ceil(Math.random() * 9) + '';
-var num2 = Math.ceil(Math.random() * 9) + '';
-var num3 = Math.ceil(Math.random() * 9) + '';
-var num4 = Math.ceil(Math.random() * 9) + '';
-var num5 = Math.ceil(Math.random() * 9) + '';
-
-//Captcha code generated
-var code = num1 + num2 + num3 + num4 + num5;
+var code = generateCaptcha();
 document.getElementById("txtCaptcha").value = code;
 document.getElementById("CaptchaDiv").innerHTML = code;
 
@@ -139,6 +131,21 @@ function validate(thisform) {
         storage(name, pass, email, gender, country);
         return true;
     }
+}
+
+function generateCaptcha() {
+    var num1 = generateRandomNumber();
+    var num2 = generateRandomNumber(); 
+    var num3 = generateRandomNumber();
+    var num4 = generateRandomNumber();
+    var num5 = generateRandomNumber();
+    var captcha_code = num1 + num2 + num3 + num4 + num5;
+    return captcha_code;
+}
+
+function generateRandomNumber() {
+    var num = Math.ceil(Math.random() * 9) + "";
+    return num;
 }
 
 // Validate input against the generated number
