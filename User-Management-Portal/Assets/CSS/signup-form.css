@@ -52,13 +52,6 @@ span {
     }
 }
 
-.edit {
-    width: 90%;
-    padding: 12px;
-    margin-top: 6px;
-    margin-bottom: 10px;
-}
-
 input[type=radio] {
     margin-top: 5px;
 }
@@ -89,7 +82,7 @@ input[type=radio] {
     background-color: rgb(187, 5, 5);
 }
 
-/* CSS for Captcha box*/
+/* CSS for Captcha box starts */
 .capbox {
     background-color: rgb(21, 166, 233);
     display: inline-block;
@@ -119,6 +112,7 @@ input[type=radio] {
     margin: 1px 0px 1px 0px;
     width: 135px;
 }
+/* CSS for Captcha box ends */
 
 .error_message {
     color: red;

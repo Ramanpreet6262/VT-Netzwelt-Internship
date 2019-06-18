@@ -1,34 +1,7 @@
-// Constants for storing different messages
-const u_name_empty = "Please enter username";
-const u_name_duplicate = "This username already exists. Please try again!";
-const pass_empty = "Please enter password";
-const cf_pass_empty = "Please enter password again";
-const email_empty = "Please enter email address";
-const email_invalid = "Please enter a valid e-mail address.";
-const pass_length = "Please enter at least 8 characters in password";
-const pass_not_match = "Password did not match: Please try again...";
-const captcha_empty = "Please Enter CAPTCHA Code";
-const captcha_not_match = "The CAPTCHA Code Does Not Match";
-
+// To generate captcha and assign it to respective fields
 var code = generateCaptcha();
 document.getElementById("txtCaptcha").value = code;
 document.getElementById("CaptchaDiv").innerHTML = code;
-
-var why = "";
-
-var storageKeys = [];
-
-var dashboardTable = {};
-var obj = {};
-var arrKeys = [];
-var keys = "";
-var myJSON = "";
-var myJSON1 = "";
-var text = "";
-var struc = "";
-var tr = "";
-var ic = "";
-var icon = "";
 
 // To validate form
 function validate(thisform) {
@@ -125,6 +98,7 @@ function validate(thisform) {
         flag++;
     }
 
+    // flag > 0 implies form has not passed all validations
     if (flag > 0) {
         return false;
     } else if (flag == 0) {
@@ -133,6 +107,7 @@ function validate(thisform) {
     }
 }
 
+// To generate captcha code
 function generateCaptcha() {
     var num1 = generateRandomNumber();
     var num2 = generateRandomNumber(); 
@@ -143,6 +118,7 @@ function generateCaptcha() {
     return captcha_code;
 }
 
+// To generate random numbers for captcha code
 function generateRandomNumber() {
     var num = Math.ceil(Math.random() * 9) + "";
     return num;
@@ -173,6 +149,8 @@ function errorMessage(id, message) {
     }, 5000);
 }
 
+// Hide signup form and display dashboard content after showing loader...
+// Also storing data from on local storage
 function storage(name, pass, email, gender, country) {
     document.getElementById("form").style.display = "none";
     loader();
@@ -208,6 +186,8 @@ function storage(name, pass, email, gender, country) {
 
 }
 
+// Creating table dynamically to show content on dashboard
+// Getting user info from local storage to fill table
 function retrieveData(arrKeys, name) {
     dashboardTable = document.getElementById("dashboardTable");
     struc = document.createElement("tbody");
@@ -224,6 +204,7 @@ function retrieveData(arrKeys, name) {
     }
 }
 
+// Creating rows in table
 function createRow(obj, name) {
     createContent(obj.name);
     createContent(obj.email);
@@ -232,6 +213,7 @@ function createRow(obj, name) {
     createActions(obj, name);
 }
 
+// Setting content in rows 
 function createContent(text) {
     var td = document.createElement("td");
     var content = document.createTextNode(text);
@@ -239,6 +221,7 @@ function createContent(text) {
     tr.appendChild(td);
 }
 
+// Creating rows for icons as well as checking for current signedin user to disable its delete icon
 function createActions(obj, name) {
     if (obj.name == name) {
         ic = document.createElement("td");
@@ -253,6 +236,7 @@ function createActions(obj, name) {
     }
 }
 
+// Creating edit and delete icons and setting their various attributes 
 function createIcons(clas, idd, func, oname) {
     icon = document.createElement("i");
     icon.setAttribute("class", clas);
@@ -262,10 +246,12 @@ function createIcons(clas, idd, func, oname) {
     ic.appendChild(icon);
 }
 
+// To reset form
 function resetForm() {
     document.getElementById("form1").reset();
 }
 
+// Logout button handling and reloading page
 function logout() {
     document.getElementById("dashboard").style.display = "none";
     document.getElementById("form").style.display = "block";
@@ -273,6 +259,7 @@ function logout() {
     window.location.reload();
 }
 
+// Edit functionality handling by hiding dashboard and showing edit page 
 function edit(oname) {
     document.getElementById("dashboard").style.display = "none";
     document.getElementById("editPage").style.display = "block";
@@ -282,6 +269,7 @@ function edit(oname) {
     fillData(userobj);
 }
 
+// Getting data to be filled in rows of edit info form 
 function fillData(userobj) {
     fillFields("editUsername", userobj.name);
     fillFields("editEmail", userobj.email);
@@ -289,33 +277,39 @@ function fillData(userobj) {
     document.getElementById(userobj.gender).checked = true;
 }
 
+// Filling respective user data in edit info form
 function fillFields(fieldName, fieldValue) {
     var field = document.getElementsByName(fieldName)[0];
     field.value = fieldValue;
 }
 
+// To display delete modal window
 function deleteModal(oname) {
     var button = document.getElementById("deleteText");
     button.setAttribute("name", oname);
     document.getElementById("myModal").style.display = "block";
 }
 
+//To close delete modal when cancel or cross button is clicked
 function closeModal() {
     document.getElementById("myModal").style.display = "none";
 }
 
+// To close delete modal when someone clicks outside of modal window
 window.onclick = function (event) {
     if (event.target == document.getElementById("myModal")) {
         document.getElementById("myModal").style.display = "none";
     }
 }
 
+// To delete particular user's local storage data
 function deleteData(oname) {
     localStorage.removeItem(oname);
     deleteStorage(oname);
     document.getElementById("myModal").style.display = "none";
 }
 
+// Delete key from keys array, deleting dashboard content and rerendering it 
 function deleteStorage(oname) {
     var keys1 = localStorage.getItem("keys");
     var arrKeys1 = JSON.parse(keys1);
@@ -331,6 +325,7 @@ function deleteStorage(oname) {
     dashboardTable.appendChild(struc);
 }
 
+// To validate edit info form 
 function save(editUserForm) {
     var originalName = editUserForm.editUsername.value;
     var updateEmail = editUserForm.editEmail.value;
@@ -360,6 +355,7 @@ function save(editUserForm) {
 
 }
 
+// To edit user details on local storage, deleteing dashboard content and rerendering it 
 function editInfo(originalName, updateEmail, updateGender, updateCountry) {
     var userData = localStorage.getItem(originalName);
     var userobj = JSON.parse(userData);
@@ -384,6 +380,7 @@ function editInfo(originalName, updateEmail, updateGender, updateCountry) {
     loader();
 }
 
+// For functioning of loader
 function loader() {
     document.getElementById("heading").style.display = "none";
     document.getElementById("loader").style.display = "block";
@@ -394,6 +391,7 @@ function loader() {
     }, 1500);
 }
 
+// To delete dashboard content, actually deleting <tbody> tag and its contents from table
 function deleteDashboardContent() {
     var parent = document.getElementById("dashboardTable");
     var child = document.getElementById("tbody");

@@ -10,29 +10,25 @@
   <!-- To link icons -->
   <link rel="stylesheet" href="../Assets/Icons/font-awesome-4.7.0/css/font-awesome.min.css">
 
-  <!-- To Link External Stylesheet and Scripts-->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- To link Bootstrap CSS -->
+  <link rel="stylesheet" href="../Assets/Bootstrap/bootstrap.min.css">
 
+  <!-- To Link External Stylesheets -->
   <link rel="stylesheet" href="../Assets/CSS/signup-form.css">
   <link rel="stylesheet" href="../Assets/CSS/dashboard.css">
   <link rel="stylesheet" href="../Assets/CSS/editPage.css">
 
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-  </script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-  </script>
+  <!-- To link Bootstrap Scripts -->
+  <script src="../Assets/Bootstrap/jquery-3.2.1.slim.min.js"></script>
+  <script src="../Assets/Bootstrap/popper.min.js"></script>
+  <script src="../Assets/Bootstrap/bootstrap.min.js"></script>
 
 </head>
 
 <body>
   <div class="container">
 
+    <!-- Heading acting as logo -->
     <h1 id="heading"><b>ZUES</b></h1>
 
     <!-- div for form starts -->
@@ -42,21 +38,20 @@
         <h3 id="signup">Signup!!</h3>
 
         Username<span>*</span><br>
-        <input type="text" class="edit" name="username" placeholder="Username" required><br>
+        <input type="text" class="form-control" name="username" placeholder="Username" required><br>
         <p id="uname" class="error_message"></p>
 
         Password<span>*</span><br>
-        <input type="password" class="edit" name="password" placeholder="Password" minlength="8" required><br>
+        <input type="password" class="form-control" name="password" placeholder="Password" minlength="8" required><br>
         <p id="passw" class="error_message"></p>
 
         Confirm Password<span>*</span><br>
-        <input type="password" class="edit" name="cfpassword" placeholder="Re-enter Password" minlength="8"
+        <input type="password" class="form-control" name="cfpassword" placeholder="Re-enter Password" minlength="8"
           required><br>
         <p id="cfpassw" class="error_message"></p>
 
         Email<span>*</span><br>
-        <input type="email" name="email" class="edit" placeholder="abc@gmail.com" required><br>
-        <br>
+        <input type="email" name="email" class="form-control" placeholder="abc@gmail.com" required><br>
         <p id="mail" class="error_message"></p>
 
         Gender<span>*</span><br>
@@ -66,7 +61,7 @@
         <br>
 
         Country<span>*</span><br>
-        <select value="" class="edit" name="country" required>
+        <select value="" class="form-control" name="country" required>
           <option selected>India</option>
           <option>United States of America</option>
           <option>Canada</option>
@@ -149,17 +144,17 @@
 
       <div id="editUserForm">
         <form id="editForm" name="editUserForm" method="POST">
+
           Username<br>
-          <input type="text" class="editUser" name="editUsername" value="" disabled><br>
+          <input type="text" class="form-control" name="editUsername" value="" disabled><br>
 
           Password<br>
-          <input type="password" class="editUser" placeholder="**********" disabled><br>
+          <input type="password" class="form-control" placeholder="**********" disabled><br>
 
           Email<br>
-          <input type="email" name="editEmail" class="editUser" value="" required><br>
+          <input type="email" name="editEmail" class="form-control" value="" required><br>
           <p id="editEmail" class="editErrorMessage"></p>
-          <br>
-
+          
           Gender<br>
           <input type="radio" name="editGender" value="male" id="male" checked>Male<br>
           <input type="radio" name="editGender" value="female" id="female">Female<br>
@@ -167,7 +162,7 @@
           <br>
 
           Country<br>
-          <select value="" class="editUser" name="editCountry" required>
+          <select value="" class="form-control" name="editCountry" required>
             <option>India</option>
             <option>United States of America</option>
             <option>Canada</option>
@@ -191,15 +186,15 @@
         </div>
       </div>
     </div>
-
     <!-- div for loader ends -->
 
   </div>
 
 
   <!-- To Link JS file-->
+  <script src="../Scripts/const.js"></script>
   <script src="../Scripts/script.js"></script>
-
+  
 </body>
 
 </html>
