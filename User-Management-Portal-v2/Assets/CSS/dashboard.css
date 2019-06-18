@@ -1,0 +1,56 @@
+#signed-up-heading {
+    margin-top: 3%;
+    text-align: center;
+    color: rgb(71, 70, 70);
+}
+
+#logout {
+    background-color: rgb(50, 155, 50);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+    margin-top: -4.5%;
+}
+
+#logout:hover {
+    background-color: rgb(187, 5, 5);
+}
+
+@media screen and (max-width: 425px) {
+    #logout {
+        float: none;
+        margin-top: 2%;
+        margin-left: 39%;
+    }
+}
+
+#signtable {
+    margin-top: 5%;
+}
+
+#pencil,
+#trash {
+    padding: 5px;
+    cursor: pointer;
+}
+
+#pencil:hover {
+    color: rgb(56, 161, 88);
+}
+
+#trash:hover {
+    color: red;
+}
+
+#trashdisabled {
+    padding: 5px;
+    cursor: pointer;
+    color: grey;
+}
+
+#myModal {
+    display: none;
+}
