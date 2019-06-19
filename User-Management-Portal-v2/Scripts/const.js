@@ -15,6 +15,7 @@ var arrKeys = [];
 var dashboardTable = {};
 var ic = "";
 var icon = "";
+var flag = 0;
 var keys = "";
 var myJSON = "";
 var myJSON1 = "";

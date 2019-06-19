@@ -3,6 +3,57 @@ var code = generateCaptcha();
 document.getElementById("txtCaptcha").value = code;
 document.getElementById("CaptchaDiv").innerHTML = code;
 
+// To generate captcha code
+function generateCaptcha() {
+    var num1 = generateRandomNumber();
+    var num2 = generateRandomNumber();
+    var num3 = generateRandomNumber();
+    var num4 = generateRandomNumber();
+    var num5 = generateRandomNumber();
+    var captcha_code = num1 + num2 + num3 + num4 + num5;
+    return captcha_code;
+}
+
+// To generate random numbers for captcha code
+function generateRandomNumber() {
+    var num = Math.ceil(Math.random() * 9) + "";
+    return num;
+}
+
+// To check that required fields should not be left empty
+function emptyFields(fieldName, message, inputFieldName) {
+    var messageId = inputFieldName + "lbl";
+    var idOfField = inputFieldName + "Field";
+    if(fieldName == ""){
+        errorMessage(messageId, message);
+        document.getElementById(idOfField).focus();
+        flag++; 
+    }
+}
+
+// To check that length of password should be greater than 8
+function passLength(fieldName, message, inputFieldName) {
+    var messageId = inputFieldName + "lbl";
+    var idOfField = inputFieldName + "Field";
+    if(fieldName.length < 8){
+        errorMessage(messageId, message);
+        document.getElementById(idOfField).focus();
+        flag++;
+    }
+}
+
+// To check that mail should be valid
+function validateMail(fieldName, message, inputFieldName) {
+    var messageId = inputFieldName + "lbl";
+    var idOfField = inputFieldName + "Field";
+    var n = fieldName.search("(?=.*@)(?=.*com)");
+    if (n == -1) {
+        errorMessage(messageId, message);
+        document.getElementById(idOfField).focus();
+        flag++;
+    }
+}
+
 // To validate form
 function validate(thisform) {
     var name = thisform.username.value;
@@ -11,32 +62,12 @@ function validate(thisform) {
     var email = thisform.email.value;
     var gender = thisform.gender.value;
     var country = thisform.country.value;
-    var flag = 0;
 
     // Validation for required fields should not be left empty
-    if (name == "" || name == null) {
-        errorMessage("uname", u_name_empty);
-        document.thisform.username.focus();
-        flag++;
-    }
-
-    if (pass == "" || pass == null) {
-        errorMessage("passw", pass_empty);
-        document.thisform.password.focus();
-        flag++;
-    }
-
-    if (cfpass == "" || cfpass == null) {
-        errorMessage("cfpassw", cf_pass_empty);
-        document.thisform.cfpassword.focus();
-        flag++;
-    }
-
-    if (email == "" || email == null) {
-        errorMessage("mail", email_empty);
-        document.thisform.email.focus();
-        flag++;
-    }
+    emptyFields(name, u_name_empty, "username");
+    emptyFields(pass, pass_empty, "password");
+    emptyFields(cfpass, cf_pass_empty, "cfpassword");
+    emptyFields(email, email_empty, "email");
 
     //Validation for username should be always unique
     if (!(localStorage.getItem("keys") === null)) {
@@ -44,7 +75,7 @@ function validate(thisform) {
         var arrKeys1 = JSON.parse(keys1);
         for (var i = 0; i < arrKeys1.length; i++) {
             if (name == arrKeys1[i]) {
-                errorMessage("uname", u_name_duplicate);
+                errorMessage("usernamelbl", u_name_duplicate);
                 document.thisform.username.focus();
                 flag++;
             }
@@ -52,39 +83,21 @@ function validate(thisform) {
     }
 
     //Validation for valid email
-    if (email.indexOf("@", 0) < 0) {
-        errorMessage("mail", email_invalid);
-        document.thisform.email.focus();
-        flag++;
-    }
-
-    if (email.indexOf(".", 0) < 0) {
-        errorMessage("mail", email_invalid);
-        document.thisform.email.focus();
-        flag++;
-    }
+    validateMail(email, email_invalid, "email");
 
     //Validation for length of password to be greater than 8
-    if (pass.length < 8) {
-        errorMessage("passw", pass_length);
-        document.thisform.password.focus();
-        flag++;
-    }
-
-    if (cfpass.length < 8) {
-        errorMessage("cfpassw", pass_length);
-        document.thisform.cfpassword.focus();
-        flag++;
-    }
+    passLength(pass, pass_length, "password");
+    passLength(cfpass, pass_length, "cfpassword");
 
     //Validation to check if both passwords are same or not
     if (pass != cfpass) {
-        errorMessage("cfpassw", pass_not_match);
+        errorMessage("cfpasswordlbl", pass_not_match);
         document.thisform.cfpassword.focus();
         flag++;
     }
 
     // Captcha Script
+    why = "";
     if (thisform.CaptchaInput.value == "") {
         why += captcha_empty;
     }
@@ -107,24 +120,7 @@ function validate(thisform) {
     }
 }
 
-// To generate captcha code
-function generateCaptcha() {
-    var num1 = generateRandomNumber();
-    var num2 = generateRandomNumber();
-    var num3 = generateRandomNumber();
-    var num4 = generateRandomNumber();
-    var num5 = generateRandomNumber();
-    var captcha_code = num1 + num2 + num3 + num4 + num5;
-    return captcha_code;
-}
-
-// To generate random numbers for captcha code
-function generateRandomNumber() {
-    var num = Math.ceil(Math.random() * 9) + "";
-    return num;
-}
-
-// Validate input against the generated number
+// Validate captcha input against the generated number
 function ValidCaptcha() {
     var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
     var str2 = removeSpaces(document.getElementById('CaptchaInput').value);
@@ -357,14 +353,9 @@ function save(thisform) {
     var check = 0;
 
     //Validation for valid email
-    if (updateEmail.indexOf("@", 0) < 0) {
-        errorMessage("mail", email_invalid);
-        document.thisform.email.focus();
-        check++;
-    }
-
-    if (updateEmail.indexOf(".", 0) < 0) {
-        errorMessage("mail", email_invalid);
+    var n = fieldName.search("(?=.*@)(?=.*com)");
+    if (n == -1) {
+        errorMessage("emaillbl", email_invalid);
         document.thisform.email.focus();
         check++;
     }
@@ -400,7 +391,6 @@ function save(thisform) {
 
         return true;
     }
-
 }
 
 // To edit user details on local storage, deleteing dashboard content and rerendering it 
