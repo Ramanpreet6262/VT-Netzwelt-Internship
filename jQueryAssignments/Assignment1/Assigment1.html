@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script>
+        function fun() {
+            $(document).ready(function () {
+                $("ul li:nth-child(3)").replaceWith("<p>" + $("ul li:nth-child(3)").text() + "</p>");
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <ul>
+        <li>Mercedes Benz</li>
+        <li>BMW</li>
+        <li>Audi</li>
+        <li>Ferrari</li>
+    </ul>
+    <input type="button" onclick="fun()" value="Change">
+</body>
+
+</html>
