@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script>
+        function myfun() {
+            $(document).ready(function() {
+                $("#div p").each(function() {
+                    if($(this).attr('test') == "abc"){
+                        $(this).css("background-color", "red");
+                    }
+                });
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <form>
+        <div id="div">
+            <p id="hello">Hello</p>
+            <p test="abc">kiddan</p>
+            <p test="def">Horr sunao</p>
+            <p test="jQuery">Jquery assignment</p>
+        </div>
+        <p test="abc">Hello</p>
+        <input type="button" value="Highlight" onclick="myfun()">
+    </form>
+</body>
+
+</html>
