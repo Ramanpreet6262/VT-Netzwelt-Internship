@@ -18,59 +18,82 @@
 
 
     <script>
-        var companyNames = ["Genpact", "Deloitte", "Infosys", "VT Netzwelt", "Wipro"];
+        var companyNames = ["Select Company", "Genpact", "Deloitte", "Infosys", "VT Netzwelt", "Wipro"];
         var errorMessage = "Please fill your skills !!";
+        var errorMessageCompany = "Please select your company !!";
+        var count = 0;
+        var flag = 0;
 
         $(document).ready(function () {
             $("#btnAddMore").click(function () {
-                $("<label />", {
-                    for: "textarea",
-                    text: "Skills"
-                }).appendTo("#userForm");
-                $("<textarea />", {
-                    class: "form-control",
-                    placeholder: "Please Enter Your Skills",
-                    id: "textArea",
-                    rows: "3"
-                }).appendTo("#userForm");
-                $("<p />", {
-                    id: "errorTextArea",
-                    display: "none"
-                }).appendTo("#userForm");
-                $("<label />", {
-                    for: "selectBox",
-                    id: "idSelectBox",
-                    text: "Choose your Company"
-                }).appendTo("#userForm");
-                $("<select />", {
-                    class: "form-control",
-                    id: "selectBox"
-                }).appendTo("#userForm");
-                for (var val in companyNames) {
-                    $("<option />", {
-                        value: companyNames[val],
-                        text: companyNames[val]
-                    }).appendTo("#selectBox");
+                if (flag == 0) {
+                    $("<label />", {
+                        for: "textarea",
+                        text: "Skills"
+                    }).appendTo("#userForm");
+                    $("<textarea />", {
+                        class: "form-control",
+                        placeholder: "Please Enter Your Skills",
+                        id: "textArea",
+                        rows: "3"
+                    }).appendTo("#userForm");
+                    $("<p />", {
+                        id: "errorTextArea",
+                        display: "none"
+                    }).appendTo("#userForm");
+                    $("<label />", {
+                        for: "selectBox",
+                        id: "idSelectBox",
+                        text: "Choose your Company"
+                    }).appendTo("#userForm");
+                    $("<select />", {
+                        class: "form-control",
+                        id: "selectBox"
+                    }).appendTo("#userForm");
+                    for (var val in companyNames) {
+                        $("<option />", {
+                            value: companyNames[val],
+                            text: companyNames[val]
+                        }).appendTo("#selectBox");
+                    }
+                    $("<p />", {
+                        id: "errorSelectBox",
+                        display: "none"
+                    }).appendTo("#userForm");
+                    $("<button />", {
+                        type: "button",
+                        class: "btn btn-success",
+                        text: "Add",
+                        id: "btnAdd"
+                    }).appendTo("#userForm");
+                    flag++;
                 }
-                $("<button />", {
-                    type: "button",
-                    class: "btn btn-success",
-                    text: "Add",
-                    id: "btnAdd"
-                }).appendTo("#userForm");
             });
 
             $(document).on("click", "#btnAdd", function () {
                 var skill = $("#textArea").val();
+                var company = $("#selectBox").val();
+                count = 0;
                 if (skill == "") {
                     $("#errorTextArea").text(errorMessage);
                     $("#errorTextArea").show();
                     setTimeout(function () {
                         $("#errorTextArea").hide();
                     }, 5000);
-                } else {
-                    var company = $("#selectBox").val();
+                    count++;
+                }
+                if (company == "Select Company") {
+                    $("#errorSelectBox").text(errorMessageCompany);
+                    $("#errorSelectBox").show();
+                    setTimeout(function () {
+                        $("#errorSelectBox").hide();
+                    }, 5000);
+                    count++;
+                }
+
+                if (count == 0) {
                     $("#userForm").empty();
+                    flag = 0;
 
                     var tr = $("<tr />").appendTo("#tBody");
 
@@ -118,7 +141,8 @@
             margin-top: 10px;
         }
 
-        #errorTextArea {
+        #errorTextArea,
+        #errorSelectBox {
             color: red;
         }
 
@@ -160,8 +184,9 @@
         </table>
 
         <i class="fa fa-trash" id="trash"></i>
-
-
+        <div id="#print">
+            <button type="button" class="btn btn-primary" id="printJson">Print Data</button>
+        </div>
     </div>
 </body>
 
