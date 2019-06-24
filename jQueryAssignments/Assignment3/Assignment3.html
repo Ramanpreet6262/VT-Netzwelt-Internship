@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script>
+        var countriesString = "Australia,Canada,India,USA";
+        var data = countriesString.split(',');
+
+        var statesString1 = "Queensland,Tasmania,Victoria,New South Wales";
+        var data1 = statesString1.split(',');
+
+        var statesString2 = "Ontario,British Columbia,Alberta,Quebec";
+        var data2 = statesString2.split(',');
+
+        var statesString3 = "Punjab,Harayana,UP,Rajasthan";
+        var data3 = statesString3.split(',');
+
+        var statesString4 = "California,Florida,Texas,Washington";
+        var data4 = statesString4.split(',');
+
+        var queenslandString = "Brisbane,Townsville,Goldcoast,Mackay";
+        var data5 = queenslandString.split(',');
+
+        var tasmaniaString = "Hobart,Launceston,Port Arthur,Ulverstone";
+        var data6 = tasmaniaString.split(',');
+
+        var victoriaString = "Melbourne,Geelong,Bendigo,Horsham";
+        var data7 = victoriaString.split(',');
+
+        var newSouthWalesString = "Sydney,New Castle,Dubbo,Albury";
+        var data8 = newSouthWalesString.split(',');
+
+        var ontarioString = "Toronto,Ottawa,Hamilton,Windsor";
+        var data9 = ontarioString.split(',');
+
+        var britishColumbiaString = "Vancouver,Victoria,Surrey,Kelowna";
+        var data10 = britishColumbiaString.split(',');
+
+        var albertaString = "Calgary,Edmonton,Lethbridge,Red Deer";
+        var data11 = albertaString.split(',');
+
+        var quebecString = "Montreal,Quebec City,Levis,Laval";
+        var data12 = quebecString.split(',');
+
+        var punjabString = "Gurdaspur,Mohali,Rajpura,Ludhiana";
+        var data13 = punjabString.split(',');
+
+        var harayanaString = "Ambala,Rohtak,Yamunanagar,Hisar";
+        var data14 = harayanaString.split(',');
+
+        var upString = "Mathura,Agra,Kanpur,Meerut";
+        var data15 = upString.split(',');
+
+        var rajasthanString = "Kota,Jaipur,Jaiselmer,Udaipur";
+        var data16 = rajasthanString.split(',');
+
+        var californiaString = "San Jose,San Francisco,San Diego,Los Angeles";
+        var data17 = californiaString.split(',');
+
+        var floridaString = "Miami,Tampa,Orlando,Naples";
+        var data18 = floridaString.split(',');
+
+        var texasString = "Houston,Dallas,Austin,San Antonio";
+        var data19 = texasString.split(',');
+
+        var washingtonString = "Seattle,Spokane,Tacoma,Olympia";
+        var data20 = washingtonString.split(',');
+
+        var selectCountry = {};
+        var selectState = {};
+        var selectCity = {};
+
+        var count = 0;
+        var flag = 0;
+
+        function createOptions(data, id) {
+            for (var val in data) {
+                $("<option />", {
+                    value: data[val],
+                    text: data[val]
+                }).appendTo(id);
+            }
+        }
+
+        function rem() {
+            if(count != 0){
+                $("#selectState").remove();
+            }
+        }
+
+        function remo() {
+            if(flag != 0){
+                $("#selectCity").remove();
+            }
+        }
+
+        $(document).ready(function () {
+
+            $("#btn").click(function () {
+                selectCountry = $("<select id=\"selectCountry\" />");
+                createOptions(data, selectCountry);
+                selectCountry.appendTo("#country");
+                $("#btn").hide();
+            });
+
+            $(document).on('change', '#selectCountry', function () {
+                selectState = $("<select id=\"selectState\" />");
+                selectState.appendTo("#state");
+                var countryValue = $("#selectCountry")[0].value;
+                $("#city").hide();
+
+                switch(countryValue) {
+                    case "Australia":
+                        rem();
+                        createOptions(data1, selectState);
+                        count++;
+                        break;
+                    case "Canada":
+                        rem();
+                        createOptions(data2, selectState);
+                        count++;
+                        break;
+                    case "India":
+                        rem();
+                        createOptions(data3, selectState);
+                        count++;
+                        break;
+                    case "USA":
+                        rem();
+                        createOptions(data4, selectState);
+                        count++;
+                        break;           
+                }
+            });
+
+            $(document).on('change', '#selectState', function () {
+                selectCity = $("<select id=\"selectCity\" />");
+                selectCity.appendTo("#city");
+                var stateValue = $("#selectState")[0].value;
+                $("#city").show();
+
+                switch(stateValue) {
+                    case "Queensland":
+                        remo();
+                        createOptions(data5, selectCity);
+                        flag++;
+                        break;
+                    case "Tasmania":
+                        remo();
+                        createOptions(data6, selectCity);
+                        flag++;
+                        break;
+                    case "Victoria":
+                        remo();
+                        createOptions(data7, selectCity);
+                        flag++;
+                        break; 
+                    case "New South Wales":
+                        remo();
+                        createOptions(data8, selectCity);
+                        flag++;
+                        break;
+                    case "Ontario":
+                        remo();
+                        createOptions(data9, selectCity);
+                        flag++;
+                        break;
+                    case "British Columbia":
+                        remo();
+                        createOptions(data10, selectCity);
+                        flag++;
+                        break;
+                    case "Alberta":
+                        remo();
+                        createOptions(data11, selectCity);
+                        flag++;
+                        break; 
+                    case "Quebec":
+                        remo();
+                        createOptions(data12, selectCity);
+                        flag++;
+                        break;
+                    case "Punjab":
+                        remo();
+                        createOptions(data13, selectCity);
+                        flag++;
+                        break;
+                    case "Harayana":
+                        remo();
+                        createOptions(data14, selectCity);
+                        flag++;
+                        break;
+                    case "UP":
+                        remo();
+                        createOptions(data15, selectCity);
+                        flag++;
+                        break; 
+                    case "Rajasthan":
+                        remo();
+                        createOptions(data16, selectCity);
+                        flag++;
+                        break;
+                    case "California":
+                        remo();
+                        createOptions(data17, selectCity);
+                        flag++;
+                        break;
+                    case "Florida":
+                        remo();
+                        createOptions(data18, selectCity);
+                        flag++;
+                        break;
+                    case "Texas":
+                        remo();
+                        createOptions(data19, selectCity);
+                        flag++;
+                        break; 
+                    case "Washington":
+                        remo();
+                        createOptions(data20, selectCity);
+                        flag++;
+                        break;                                                            
+                }
+            });
+        });
+    </script>
+
+    <style>
+        #country, #state, #city {
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="country"></div>
+
+    <div id="state"></div>
+
+    <div id="city"></div>
+
+    <input type="button" id="btn" value="Create Country Select Box">
+    
+</body>
+
+</html>
