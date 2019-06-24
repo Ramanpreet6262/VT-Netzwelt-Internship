@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="../Assets/Icons/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+
+    <script>
+        var companyNames = ["Genpact", "Deloitte", "Infosys", "VT Netzwelt", "Wipro"];
+        var errorMessage = "Please fill your skills !!";
+
+        $(document).ready(function () {
+            $("#btnAddMore").click(function () {
+                $("<label />", {
+                    for: "textarea",
+                    text: "Skills"
+                }).appendTo("#userForm");
+                $("<textarea />", {
+                    class: "form-control",
+                    placeholder: "Please Enter Your Skills",
+                    id: "textArea",
+                    rows: "3"
+                }).appendTo("#userForm");
+                $("<p />", {
+                    id: "errorTextArea",
+                    display: "none"
+                }).appendTo("#userForm");
+                $("<label />", {
+                    for: "selectBox",
+                    id: "idSelectBox",
+                    text: "Choose your Company"
+                }).appendTo("#userForm");
+                $("<select />", {
+                    class: "form-control",
+                    id: "selectBox"
+                }).appendTo("#userForm");
+                for (var val in companyNames) {
+                    $("<option />", {
+                        value: companyNames[val],
+                        text: companyNames[val]
+                    }).appendTo("#selectBox");
+                }
+                $("<button />", {
+                    type: "button",
+                    class: "btn btn-success",
+                    text: "Add",
+                    id: "btnAdd"
+                }).appendTo("#userForm");
+            });
+
+            $(document).on("click", "#btnAdd", function () {
+                var skill = $("#textArea").val();
+                if (skill == "") {
+                    $("#errorTextArea").text(errorMessage);
+                    $("#errorTextArea").show();
+                    setTimeout(function () {
+                        $("#errorTextArea").hide();
+                    }, 5000);
+                } else {
+                    var company = $("#selectBox").val();
+                    $("#userForm").empty();
+
+                    var tr = $("<tr />").appendTo("#tBody");
+
+                    var checkbox = $("<input />", {
+                        type: "checkbox",
+                        name: "check"
+                    });
+                    $("<td />", {
+                        html: checkbox
+                    }).appendTo(tr);
+                    $("<td />", {
+                        text: skill
+                    }).appendTo(tr);
+                    $("<td />", {
+                        text: company
+                    }).appendTo(tr);
+
+                    $("#userTable").show();
+                }
+            });
+
+            $("#trash").click(function () {
+                $("#tBody").find("input[name='check']").each(function () {
+                    if ($(this).is(":checked")) {
+                        $(this).parents("tr").remove();
+                    }
+                });
+            });
+
+        });
+    </script>
+
+    <style>
+        #btnAddMore {
+            margin: 10px;
+        }
+
+        #userFormDiv {
+            margin: 10px;
+            width: 45%;
+        }
+
+        #btnAdd,
+        #idSelectBox {
+            margin-top: 10px;
+        }
+
+        #errorTextArea {
+            color: red;
+        }
+
+        #userTable {
+            width: 70%;
+            margin: 10px;
+            display: none;
+        }
+
+        #trash {
+            padding: 5px;
+            cursor: pointer;
+            font-size: 40px;
+        }
+
+        #trash:hover {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <button type="button" id="btnAddMore" class="btn btn-info">Add More</button>
+    <div id="userFormDiv">
+        <form id="userForm" name="thisForm">
+        </form>
+    </div>
+    <div id="userTable">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Select</th>
+                    <th scope="col">Skills</th>
+                    <th scope="col">Company</th>
+                </tr>
+            </thead>
+            <tbody id="tBody">
+            </tbody>
+        </table>
+
+        <i class="fa fa-trash" id="trash"></i>
+
+
+    </div>
+</body>
+
+</html>
