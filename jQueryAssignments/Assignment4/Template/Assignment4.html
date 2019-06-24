@@ -23,6 +23,20 @@
         var errorMessageCompany = "Please select your company !!";
         var count = 0;
         var flag = 0;
+        var users = [];
+
+        function generateKey() {
+            var num1 = generateRandomNumber();
+            var num2 = generateRandomNumber();
+            var num3 = generateRandomNumber();
+            var key = num1 + num2 + num3;
+            return key;
+        }
+
+        function generateRandomNumber() {
+            var num = Math.ceil(Math.random() * 9) + "";
+            return num;
+        }
 
         $(document).ready(function () {
             $("#btnAddMore").click(function () {
@@ -95,6 +109,8 @@
                     $("#userForm").empty();
                     flag = 0;
 
+                    var key = generateKey();
+
                     var tr = $("<tr />").appendTo("#tBody");
 
                     var checkbox = $("<input />", {
@@ -105,6 +121,9 @@
                         html: checkbox
                     }).appendTo(tr);
                     $("<td />", {
+                        text: key
+                    }).appendTo(tr);
+                    $("<td />", {
                         text: skill
                     }).appendTo(tr);
                     $("<td />", {
@@ -112,15 +131,32 @@
                     }).appendTo(tr);
 
                     $("#userTable").show();
+
+                    var userInfo = {
+                        key: key,
+                        skill: skill,
+                        company: company
+                    };
+                    users.push(userInfo);
                 }
             });
 
             $("#trash").click(function () {
                 $("#tBody").find("input[name='check']").each(function () {
                     if ($(this).is(":checked")) {
+                        var userKey = $(this).parent().next().text();
+                        for (var i = 0; i < users.length; i++) {
+                            if (users[i].key == userKey) {
+                                users.splice(i, 1);
+                            }
+                        }
                         $(this).parents("tr").remove();
                     }
                 });
+            });
+
+            $("#printJson").click(function () {
+                console.log(users);
             });
 
         });
@@ -175,6 +211,7 @@
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Select</th>
+                    <th scope="col">Id</th>
                     <th scope="col">Skills</th>
                     <th scope="col">Company</th>
                 </tr>
