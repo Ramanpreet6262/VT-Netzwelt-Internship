@@ -1,0 +1,79 @@
+#compare {
+    position: absolute;
+    left: 75%;
+    top: 85px;
+    padding: 10px;
+}
+
+.compareCard {
+    width: 13rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: #f1f1f1; 
+    margin-top: 15px;
+}
+
+.compare-card-img {
+    width: 140px;
+    height: 230px;
+    padding: 10px;
+    margin-left: 32px;
+    margin-top: 10px;
+}
+
+#productList {
+    width: 75%;
+    padding: 10px;
+}
+
+.feature-list {
+    margin-left: -13%;
+}
+
+.card {
+    height: 520px;
+    width: 13rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: #f1f1f1;
+}
+
+.jumbotron {
+    padding-bottom: 10px;
+    padding-top: 15px;
+    margin-bottom: 10px;
+}
+
+.card-img-top {
+    width: 140px;
+    height: 221px;
+    padding: 10px;
+    margin-left: 32px;
+    margin-top: 10px;
+}
+
+.col-sm-3 {
+    padding: 10px;
+}
+
+label {
+    padding-left: 5px;
+}
+
+.compcard {
+    margin-left: 70px;
+}
+
+.delete {
+    float: right;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+.delete:hover {
+    cursor: pointer;
+}
+
+#compareBtn {
+    margin-top: 15px;
+    margin-left: 125px;
+    display: none; 
+}
