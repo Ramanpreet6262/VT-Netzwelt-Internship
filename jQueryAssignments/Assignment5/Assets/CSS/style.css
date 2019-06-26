@@ -107,3 +107,9 @@ label {
 #compareModalBody {
     background-color: rgb(203, 236, 247);
 }
+
+.footer {
+    background-color: rgb(216, 214, 214);
+    height: 60px;
+    width: 100%;
+}
