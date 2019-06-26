@@ -64,8 +64,8 @@ label {
 
 .delete {
     float: right;
-    margin-top: 5px;
     margin-right: 5px;
+    font-size: 25px;
 }
 
 .delete:hover {
@@ -76,4 +76,34 @@ label {
     margin-top: 15px;
     margin-left: 125px;
     display: none; 
+}
+
+#alert {
+    color: black;
+    background-color: red;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#mymodal {
+    display : none;
+}
+
+#alertModalHeader {
+    background-color: black;
+    color: white;
+}
+
+#compareModal {
+    display: none;
+}
+
+.compareModalStyle {
+    background-color: whitesmoke;
+    color: rgb(70, 69, 69);
+}
+
+#compareModalBody {
+    background-color: rgb(203, 236, 247);
 }

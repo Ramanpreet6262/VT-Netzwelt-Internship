@@ -2,11 +2,15 @@
 <html>
 
 <head>
+    <!-- To link icons -->
     <link rel="stylesheet" href="../Assets/Icons/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!-- To link bootstrap css cdn -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- To link external stylesheets -->
     <link rel="stylesheet" href="../Assets/CSS/style.css">
 
+    <!-- bootstrap cdns -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
@@ -17,197 +21,63 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
 
+    <!-- jQuery cdn -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-
-    <script>
-        var products = [{
-                name: "Redmi Note 7S",
-                price: "Rs. 10,999",
-                image: "redminote7s.jpeg",
-                ram: "3GB Ram",
-                rom: "32GB Rom",
-                display: "6.3 Inch Display",
-                battery: "4000mAh Battery",
-                processor: "Snapdragon 660 Processor"
-            },
-            {
-                name: "Redmi GO",
-                price: "Rs. 4,799",
-                image: "redmigo.jpeg",
-                ram: "1GB Ram",
-                rom: "16GB Rom",
-                display: "5 Inch Display",
-                battery: "3000mAh Battery",
-                processor: "Snapdragon 425 Processor"
-            },
-            {
-                name: "Mi Note 6 Pro",
-                price: "Rs. 11,999",
-                image: "redminote6pro.jpeg",
-                ram: "4GB Ram",
-                rom: "64GB Rom",
-                display: "6.26 Inch Display",
-                battery: "4000mAh Battery",
-                processor: "Snapdragon 636 Processor"
-            },
-            {
-                name: "Redmi 6",
-                price: "Rs. 8,499",
-                image: "redmi6.jpeg",
-                ram: "3GB Ram",
-                rom: "64GB Rom",
-                display: "5.45 Inch Display",
-                battery: "3000mAh Battery",
-                processor: "Mediatek P22 Processor"
-            },
-            {
-                name: "Redmi Y2",
-                price: "Rs. 8,999",
-                image: "redmiy2.jpeg",
-                ram: "3GB Ram",
-                rom: "32GB Rom",
-                display: "5.99 Inch Display",
-                battery: "3080mAh Battery",
-                processor: "Snapdragon 625 Processor"
-            },
-            {
-                name: "Samsung A10",
-                price: "Rs. 7,990",
-                image: "samsunggalaxya10.jpeg",
-                ram: "2GB Ram",
-                rom: "32GB Rom",
-                display: "6.2 Inch Display",
-                battery: "3400mAh Battery",
-                processor: "Exynos 7884 Processor"
-            },
-            {
-                name: "Samsung A20",
-                price: "Rs. 11,490",
-                image: "samsunggalaxya20.jpeg",
-                ram: "3GB Ram",
-                rom: "32GB Rom",
-                display: "6.4 Inch Display",
-                battery: "4000mAh Battery",
-                processor: "Exynos 7884B Processor"
-            },
-            {
-                name: "Samsung M10",
-                price: "Rs. 9,290",
-                image: "samsunggalaxym10.jpeg",
-                ram: "3GB Ram",
-                rom: "32GB Rom",
-                display: "6.22 Inch Display",
-                battery: "3400mAh Battery",
-                processor: "Exynos OctaCore Processor"
-            }
-        ];
-
-        var flag = 0;
-
-        $(document).ready(function () {
-            for (var i = 0; i < products.length; i++) {
-                $("<div />", {
-                    class: "col-sm-3",
-                    id: "col" + i
-                }).appendTo("#productRow");
-                $("<div />", {
-                    class: "card",
-                    id: "card" + i
-                }).appendTo("#col" + i);
-                $("<img />", {
-                    src: "../Assets/Images/" + products[i].image,
-                    class: "card-img-top",
-                    alt: products[i].image
-                }).appendTo("#card" + i);
-                $("<div />", {
-                    class: "card-body",
-                    id: "cardBody" + i
-                }).appendTo("#card" + i);
-                $("<h5 />", {
-                    class: "card-title",
-                    text: products[i].name
-                }).appendTo("#cardBody" + i);
-                $("<h6 />", {
-                    class: "card-subtitle mb-2 text-muted",
-                    text: products[i].price
-                }).appendTo("#cardBody" + i);
-                $("<ul />", {
-                    class: "feature-list",
-                    id: "ul" + i
-                }).appendTo("#cardBody" + i);
-                $("<li />", {
-                    text: products[i].ram
-                }).appendTo("#ul" + i);
-                $("<li />", {
-                    text: products[i].rom
-                }).appendTo("#ul" + i);
-                $("<li />", {
-                    text: products[i].display
-                }).appendTo("#ul" + i);
-                $("<li />", {
-                    text: products[i].battery
-                }).appendTo("#ul" + i);
-                $("<li />", {
-                    text: products[i].processor
-                }).appendTo("#ul" + i);
-                $("<input />", {
-                    type: "checkbox",
-                    id: "check" + i
-                }).appendTo("#cardBody" + i);
-                $("<label />", {
-                    text: "Add to Compare"
-                }).appendTo("#cardBody" + i);
-            }
-            
-            $(document).on("click", "input[type='checkbox']", function () {
-                if (flag < 3) {
-                    var checkBoxId = $(this).attr("id");
-                    var index = checkBoxId.substr(5, 5);
-                    $(this).attr('disabled','true');
-                    $("<div />", {
-                        class: "compareCard",
-                        id: "compareCard" + index
-                    }).appendTo("#compcarddiv");
-                    $("<label />", {class: "delete", text: "X", id: index}).appendTo("#compareCard" + index);
-                    $("<img />", {src: "../Assets/Images/" + products[index].image, class: "compare-card-img", alt: products[index].image}).appendTo("#compareCard" + index);
-                    $("<div />", {class: "card-body", id: "card-body" + index}).appendTo("#compareCard" + index);
-                    $("<h5 />", {class: "card-title", text: products[index].name}).appendTo("#card-body" + index);
-                    flag++;
-                } else {
-                    console.log("fdhj");
-                }
-
-                if(flag >= 2) {
-                    $("#compareBtn").show();
-                }
-
-                if(flag < 2) {
-                    $("#compareBtn").hide();
-                }
-
-            });
-
-        });
-    </script>
 </head>
 
 <body>
+    <!-- Heading Jumbotron -->
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <h1 class="display-5">Mobile Phones</h1>
         </div>
     </div>
+    <!-- Main Page Products List Layout -->
     <div id="productList">
         <div class="container">
             <div class="row" id="productRow">
             </div>
         </div>
     </div>
+    <!-- Comparison layout -->
     <div id="compare">
         <div class="compcard" id="compcarddiv">
         </div>
         <button type="button" class="btn btn-primary" id="compareBtn">Compare</button>
     </div>
+    <!-- Error alert modal -->
+    <div class="modal" id="mymodal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" id="alertModalHeader">
+                    <h5 class="modal-title"><span id="alert">!</span> You have already selected 3 products</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Comparison modal -->
+    <div class="modal" id="compareModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header compareModalStyle">
+                    <h4 class="modal-title"><b>Comparison</b></h4>
+                    <button type="button" class="close" id="btnCross" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="compareModalBody">
+                </div>
+                <div class="modal-footer compareModalStyle">
+                    <button type="button" class="btn btn-secondary" id="btnClose" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- To link External Scripts -->
+    <script src="../Script/data.js"></script>
+    <script src="../Script/script.js"></script>
+
 </body>
 
 </html>
