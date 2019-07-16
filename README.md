@@ -1,3 +1,3 @@
 # VT-Netzwelt-Internship
 
-Repository containing work I did in my internahip
+Repository containing work I did in my internship
