@@ -7,6 +7,9 @@
         function fun() {
             $(document).ready(function () {
                 $("ul li:nth-child(3)").replaceWith("<p>" + $("ul li:nth-child(3)").text() + "</p>");
+                /*$("ul li:nth-child(3)").replaceWith(function(){
+                        return "<p>" + $(this).text() + "</p>";
+                })*/
             });
         }
     </script>
