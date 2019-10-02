@@ -1,7 +1,7 @@
-let messages = require("../messages/messages");
-let bcrypt = require("bcryptjs");
-let db = require("../util/database");
-let jwt = require("jsonwebtoken");
+const messages = require("../messages/messages");
+const bcrypt = require("bcryptjs");
+const db = require("../util/database");
+const jwt = require("jsonwebtoken");
 
 exports.getCheck = (req, res, next) => {
   if (req.session.err) {
@@ -31,7 +31,9 @@ exports.postCheck = async (req, res, next) => {
     let query = { email: req.body.email };
     let user = await db.query(sql, query, (err, resl) => {
       if (resl.length !== 0) {
-        res.json("Email Already exist");
+        //res.json({ message: messages.emailExists });
+        const error = new Error(messages.emailExists);
+        next(error);
       } else {
         bcrypt.genSalt(10, (err, salt) => {
           bcrypt.hash(req.body.password, salt, (err, hash) => {
@@ -62,17 +64,23 @@ exports.postLogin = async (req, res, next) => {
     let array = err.map(errs => {
       return errs.msg;
     });
-    res.status(400).json(err);
+    //res.status(400).json(err);
+    const error = new Error(err[0].msg);
+    next(error);
   } else {
     let sql = "select password from user where ?";
     let query = { email: req.body.email };
     let user = await db.query(sql, query, (err, resl) => {
       if (resl.length === 0) {
-        res.json("Email Does not exists");
+        // res.json({ message: messages.emailDoesNotExists });
+        const error = new Error(messages.emailDoesNotExists);
+        next(error);
       } else {
         bcrypt.compare(req.body.password, resl[0].password, (err, match) => {
           if (!match) {
-            res.json("Email or password do not match");
+            // res.json({ message: messages.loginError });
+            const error = new Error(messages.loginError);
+            next(error);
           } else {
             const TOKEN_SECRET =
               process.env.TOKEN_SECRET || "hdioehfduewuifbjrfugr";
@@ -86,8 +94,8 @@ exports.postLogin = async (req, res, next) => {
 };
 
 exports.getData = async (req, res, next) => {
-    let sql = "select email from user";
-    let user = await db.query(sql, (err, resl) => {
-        res.json(resl);
-    });
+  let sql = "select email from user";
+  let user = await db.query(sql, (err, resl) => {
+    res.json(resl);
+  });
 };
