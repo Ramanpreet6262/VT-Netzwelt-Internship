@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const expressSession = require('express-session');
+const morgan = require('morgan');
 
 const validateRoutes = require('./routes/validation');
 
@@ -10,6 +11,9 @@ const messages = require("./messages/messages");
 require('dotenv').config();
 
 const app = express();
+
+// Logging middleware Morgan
+app.use(morgan('dev'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
