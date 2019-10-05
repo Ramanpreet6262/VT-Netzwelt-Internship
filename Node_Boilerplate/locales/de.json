@@ -1,0 +1,13 @@
+{
+	"formSubmitted": "User erfolgreich angemeldet !!",
+	"welcomeMessage": "Hallo, willkommen auf der Seite",
+	"accessDenied": "Zugriff abgelehnt",
+	"emailDoesNotExists": "E-Mail existiert nicht",
+	"emailExists": "E-Mail existiert bereits",
+	"invalidEmail": "Bitte geben Sie eine gültige Email-Adresse ein",
+	"invalidToken": "Ungültiges Token",
+	"loginError": "E-Mail oder Passwort stimmen nicht überein",
+	"notFound": "Nicht gefunden!!",
+	"passLength": "Das Passwort sollte mindestens 8 Zeichen lang sein",
+	"passNotMatch": "Passwort stimmte nicht überein: Bitte versuchen Sie es erneut ..."
+}

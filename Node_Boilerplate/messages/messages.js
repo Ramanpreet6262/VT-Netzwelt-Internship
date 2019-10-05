@@ -1,6 +1,6 @@
 // success messages
 exports.formSubmitted = "User Signed up successfully!!";
-exports.welcomeMessage = "Hi, Welcome";
+exports.welcomeMessage = "Hi, Welcome to the site";
 
 // error messages
 exports.accessDenied = "Access Denied";

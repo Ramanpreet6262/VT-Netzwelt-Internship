@@ -11,16 +11,24 @@ exports.getCheck = (req, res, next) => {
     });
     res.json(array);
   } else {
-    res.json({ message: messages.welcomeMessage });
+    // implemented internationalisation
+    res.setLocale(req.cookies.i18n);
+    res.json({ message: res.__("welcomeMessage") });
+    //res.json({ message: messages.welcomeMessage }); // sending json without internationalisation
   }
   req.session.err = null;
 };
 
 exports.postCheck = async (req, res, next) => {
-  req.check("email", messages.invalidEmail).isEmail();
-  req.check("password", messages.passNotMatch).equals(req.body.confirmPassword);
-  req.check("password", messages.passLength).isLength({ min: 8 });
-  req.check("confirmPassword", messages.passLength).isLength({ min: 8 });
+  // req.check("email", messages.invalidEmail).isEmail();
+  // req.check("password", messages.passNotMatch).equals(req.body.confirmPassword);
+  // req.check("password", messages.passLength).isLength({ min: 8 });
+  // req.check("confirmPassword", messages.passLength).isLength({ min: 8 });
+
+  req.check("email", res.__("invalidEmail")).isEmail();
+  req.check("password", res.__("passNotMatch")).equals(req.body.confirmPassword);
+  req.check("password", res.__("passLength")).isLength({ min: 8 });
+  req.check("confirmPassword", res.__("passLength")).isLength({ min: 8 });
 
   let err = req.validationErrors();
   if (err) {
@@ -32,7 +40,8 @@ exports.postCheck = async (req, res, next) => {
     let user = await db.query(sql, query, (err, resl) => {
       if (resl.length !== 0) {
         //res.json({ message: messages.emailExists });
-        const error = new Error(messages.emailExists);
+        //const error = new Error(messages.emailExists);
+        const error = new Error(res.__("emailExists"));
         next(error);
       } else {
         bcrypt.genSalt(10, (err, salt) => {
@@ -46,7 +55,8 @@ exports.postCheck = async (req, res, next) => {
             let query = db.query(sql, user, (err, result) => {
               if (err) throw err;
               req.session.err = null;
-              res.json({ message: messages.formSubmitted });
+              //res.json({ message: messages.formSubmitted });
+              res.json({ message: res.__("formSubmitted") });
             });
           });
         });
@@ -56,8 +66,11 @@ exports.postCheck = async (req, res, next) => {
 };
 
 exports.postLogin = async (req, res, next) => {
-  req.check("email", messages.invalidEmail).isEmail();
-  req.check("password", messages.passLength).isLength({ min: 8 });
+  // req.check("email", messages.invalidEmail).isEmail();
+  // req.check("password", messages.passLength).isLength({ min: 8 });
+ 
+  req.check("email", res.__("invalidEmail")).isEmail();
+  req.check("password", res.__("passLength")).isLength({ min: 8 });
   let err = req.validationErrors();
 
   if (err) {
@@ -73,13 +86,15 @@ exports.postLogin = async (req, res, next) => {
     let user = await db.query(sql, query, (err, resl) => {
       if (resl.length === 0) {
         // res.json({ message: messages.emailDoesNotExists });
-        const error = new Error(messages.emailDoesNotExists);
+        //const error = new Error(messages.emailDoesNotExists);
+        const error = new Error(res.__("emailDoesNotExists"));
         next(error);
       } else {
         bcrypt.compare(req.body.password, resl[0].password, (err, match) => {
           if (!match) {
             // res.json({ message: messages.loginError });
-            const error = new Error(messages.loginError);
+            //const error = new Error(messages.loginError);
+            const error = new Error(res.__("loginError"));
             next(error);
           } else {
             const TOKEN_SECRET =

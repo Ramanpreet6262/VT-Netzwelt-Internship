@@ -7,7 +7,8 @@ exports.verify = (req, res, next) => {
   if (!token) {
     // return res.status(401).json({ message: messages.accessDenied });
     // Instead of returning error function created manually, we can return error through error handling middleware
-    const error = new Error(messages.accessDenied);
+    const error = new Error(res.__("accessDenied"));
+    // const error = new Error(messages.accessDenied);
     error.status = 401;
     throw error; 
   } else {
@@ -19,7 +20,8 @@ exports.verify = (req, res, next) => {
     } catch {
       // res.status(401).json({ message: messages.invalidToken });
       // Instead of returning error function created manually, we can return error through error handling middleware
-      const error = new Error(messages.invalidToken);
+      const error = new Error(res.__("invalidToken"));
+      // const error = new Error(messages.invalidToken);
       error.status = 401;
       next(error); 
     }

@@ -2,7 +2,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const expressValidator = require("express-validator");
 const expressSession = require("express-session");
+const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
+const i18n = require("i18n");
 const fs = require("fs");
 const path = require("path");
 const rfs = require("rotating-file-stream");
@@ -59,13 +61,36 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(expressValidator());
+
+// configuring i18n module
+i18n.configure({
+
+//it defines how many languages we would support in our application
+locales: ['en', 'de'],
+
+//it defines the path to language json files, default is /locales
+directory: path.join(__dirname, "locales"),
+
+//it defines the default language
+defaultLocale: 'en',
+
+//it defines a custom cookie name to parse locale settings from it
+cookie: 'i18n'
+});
+
+app.use(cookieParser("A keyboard, cat"));
+
 app.use(
   expressSession({
     secret: "A keyboard, cat",
-    saveUninitialized: false,
-    resave: true
+    resave: true,
+    saveUninitialized: true,
+    cookie: { maxAge: 60000 }
   })
 );
+
+//init i18n to use it in app
+app.use(i18n.init);
 
 // dotenv implementation using a route to send a environment variable in return
 // app.get('/dotenv', (req, res) => {
@@ -77,7 +102,8 @@ app.use(validateRoutes);
 
 // middleware for 404 request
 app.use((req, res, next) => {
-  const error = new Error(messages.notFound);
+  // const error = new Error(messages.notFound);
+  const error = new Error(res.__("notFound"));
   error.status = 404;
   next(error);
 });

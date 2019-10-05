@@ -1,0 +1,13 @@
+{
+	"formSubmitted": "User Signed up successfully!!",
+	"welcomeMessage": "Hi, welcome to the site",
+	"accessDenied": "Access Denied",
+	"emailDoesNotExists": "Email Does not exists",
+	"emailExists": "Email already exists",
+	"invalidEmail": "Please enter a valid email",
+	"invalidToken": "Invalid Token",
+	"loginError": "Email or password do not match",
+	"notFound": "Not Found!!",
+	"passLength": "Password length should be at least 8 characters",
+	"passNotMatch": "Password did not match: Please try again..."
+}
