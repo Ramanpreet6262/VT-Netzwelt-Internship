@@ -2,6 +2,16 @@ const messages = require("../messages/messages");
 const bcrypt = require("bcryptjs");
 const db = require("../util/database");
 const jwt = require("jsonwebtoken");
+const nodemailer = require("nodemailer");
+const sendgridTransport = require("nodemailer-sendgrid-transport");
+const dotenv = require("dotenv");
+dotenv.config();
+
+const transporter = nodemailer.createTransport(sendgridTransport({
+  auth: {
+    api_key: process.env.API_KEY
+  }
+}));
 
 exports.getCheck = (req, res, next) => {
   if (req.session.err) {
@@ -63,6 +73,12 @@ exports.postCheck = async (req, res, next) => {
                 if (err) throw err;
                 req.session.err = null;
                 //res.json({ message: messages.formSubmitted });
+                transporter.sendMail({
+                  to: req.body.email,
+                  from: 'admin@node-boilerplate.com',
+                  subject: 'Sign up Successful',
+                  html: '<h1> SIGN UP Successful </h1><br><h3> Enjoy using Node Boilerplate </h3>'
+                });
                 res.json({ message: res.__("formSubmitted") });
               });
             });
