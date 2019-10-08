@@ -8,6 +8,7 @@ const i18n = require("i18n");
 const fs = require("fs");
 const path = require("path");
 const rfs = require("rotating-file-stream");
+const multer = require("multer");
 
 const validateRoutes = require("./routes/validation");
 
@@ -64,18 +65,17 @@ app.use(expressValidator());
 
 // configuring i18n module
 i18n.configure({
+  //it defines how many languages we would support in our application
+  locales: ["en", "de"],
 
-//it defines how many languages we would support in our application
-locales: ['en', 'de'],
+  //it defines the path to language json files, default is /locales
+  directory: path.join(__dirname, "locales"),
 
-//it defines the path to language json files, default is /locales
-directory: path.join(__dirname, "locales"),
+  //it defines the default language
+  defaultLocale: "en",
 
-//it defines the default language
-defaultLocale: 'en',
-
-//it defines a custom cookie name to parse locale settings from it
-cookie: 'i18n'
+  //it defines a custom cookie name to parse locale settings from it
+  cookie: "i18n"
 });
 
 app.use(cookieParser("A keyboard, cat"));
@@ -96,6 +96,30 @@ app.use(i18n.init);
 // app.get('/dotenv', (req, res) => {
 //     res.send(process.env.TOKEN);
 // });
+
+const fileStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "images");
+  },
+  filename: (req, file, cb) => {
+    cb(null, new Date().toISOString() + "-" + file.originalname);
+  }
+});
+
+const fileFilter = (req, file, cb) => {
+  if (
+    file.mimetype === "image/png" ||
+    file.mimetype === "image/jpg" ||
+    file.mimetype === "image/jpeg"
+  ) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
+// multer middleware  (Imp thing to keep in mind that this middleware should be used before middleware for routes)
+app.use(multer({storage: fileStorage, fileFilter: fileFilter, limits: 100000}).single('image'));
 
 // middleware for our routes
 app.use(validateRoutes);

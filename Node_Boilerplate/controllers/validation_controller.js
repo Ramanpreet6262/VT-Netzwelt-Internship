@@ -44,22 +44,30 @@ exports.postCheck = async (req, res, next) => {
         const error = new Error(res.__("emailExists"));
         next(error);
       } else {
-        bcrypt.genSalt(10, (err, salt) => {
-          bcrypt.hash(req.body.password, salt, (err, hash) => {
-            let user = {
-              name: req.body.name,
-              email: req.body.email,
-              password: hash
-            };
-            let sql = "Insert into user set ?";
-            let query = db.query(sql, user, (err, result) => {
-              if (err) throw err;
-              req.session.err = null;
-              //res.json({ message: messages.formSubmitted });
-              res.json({ message: res.__("formSubmitted") });
+        const uploadedImage = req.file;
+        if (!uploadedImage) {
+          const error = new Error(res.__("notImage"));
+          error.status = 422;
+          next(error);
+        } else {
+          bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(req.body.password, salt, (err, hash) => {
+              let user = {
+                name: req.body.name,
+                email: req.body.email,
+                password: hash,
+                imageUrl: uploadedImage.path
+              };
+              let sql = "Insert into user set ?";
+              let query = db.query(sql, user, (err, result) => {
+                if (err) throw err;
+                req.session.err = null;
+                //res.json({ message: messages.formSubmitted });
+                res.json({ message: res.__("formSubmitted") });
+              });
             });
           });
-        });
+        }
       }
     });
   }
@@ -68,7 +76,7 @@ exports.postCheck = async (req, res, next) => {
 exports.postLogin = async (req, res, next) => {
   // req.check("email", messages.invalidEmail).isEmail();
   // req.check("password", messages.passLength).isLength({ min: 8 });
- 
+
   req.check("email", res.__("invalidEmail")).isEmail();
   req.check("password", res.__("passLength")).isLength({ min: 8 });
   let err = req.validationErrors();

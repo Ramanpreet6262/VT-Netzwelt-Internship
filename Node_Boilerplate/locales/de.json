@@ -8,6 +8,7 @@
 	"invalidToken": "Ungültiges Token",
 	"loginError": "E-Mail oder Passwort stimmen nicht überein",
 	"notFound": "Nicht gefunden!!",
+	"notImage": "Angehängte Datei ist kein Bild",
 	"passLength": "Das Passwort sollte mindestens 8 Zeichen lang sein",
 	"passNotMatch": "Passwort stimmte nicht überein: Bitte versuchen Sie es erneut ..."
 }

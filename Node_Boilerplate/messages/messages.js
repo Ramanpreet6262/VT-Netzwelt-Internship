@@ -10,5 +10,6 @@ exports.invalidEmail = "Please enter a valid email";
 exports.invalidToken = "Invalid Token";
 exports.loginError = "Email or password do not match";
 exports.notFound = "Not Found!!";
+exports.notImage = "Attached file is not an image";
 exports.passLength = "Password length should be at least 8 characters";
 exports.passNotMatch = "Password did not match: Please try again...";
