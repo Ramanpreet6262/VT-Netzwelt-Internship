@@ -9,14 +9,15 @@ const fs = require("fs");
 const path = require("path");
 const rfs = require("rotating-file-stream");
 const multer = require("multer");
+const dotenv = require("dotenv");
 
 const validateRoutes = require("./routes/validation");
 
 const messages = require("./messages/messages");
 
-require("dotenv").config();
-
 const app = express();
+
+dotenv.config();
 
 const logDirectory = path.join(__dirname, "log");
 
@@ -91,11 +92,6 @@ app.use(
 
 //init i18n to use it in app
 app.use(i18n.init);
-
-// dotenv implementation using a route to send a environment variable in return
-// app.get('/dotenv', (req, res) => {
-//     res.send(process.env.TOKEN);
-// });
 
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
