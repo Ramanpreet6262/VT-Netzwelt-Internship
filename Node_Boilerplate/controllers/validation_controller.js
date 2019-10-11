@@ -74,10 +74,23 @@ exports.postCheck = async (req, res, next) => {
                 req.session.err = null;
                 //res.json({ message: messages.formSubmitted });
                 transporter.sendMail({
+
+                  // Syntax for sending mail to more than one user
+                  // to: ['recipient1@example.org', 'recipient2@example.org'],
+
                   to: req.body.email,
                   from: 'admin@node-boilerplate.com',
-                  subject: 'Sign up Successful',
+                  fromname: 'Node_Boilerplate',
+                  subject: 'Welcome to Node_Boilerplate',
                   html: '<h1> SIGN UP Successful </h1><br><h3> Enjoy using Node Boilerplate </h3>'
+                  
+                  // Syntax for attaching a attachment to our mail...
+                  /*attachments: [
+                    {
+                      filename: 'hello.txt',
+                      path: __dirname + '/hello.txt'
+                    }
+                  ]*/
                 });
                 res.json({ message: res.__("formSubmitted") });
               });
