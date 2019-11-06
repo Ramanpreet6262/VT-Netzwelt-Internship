@@ -1,0 +1,36 @@
+1. Strings
+
+SET and GET Commands
+
+redis> set firstname shekharOKredis> set lastname gulatiOKredis> get firstname"shekhar"redis> get lastname"gulati"
+
+INCR and DECR Commands
+
+redis> incr hitcounter(integer) 1redis> incr hitcounter(integer) 2redis> incr hitcounter(integer) 3redis> decr hitcounter(integer) 2
+
+
+
+
+2. Lists
+
+redis> LPUSH words austerity(integer) 1redis> LPUSH words socialism(integer) 2redis> LPUSH words moritorium(integer) 3redis> LPUSH words socialism(integer) 4redis> LPUSH words socialism(integer) 5redis> LRANGE words 0 21) "socialism"2) "socialism"3) "moritorium"
+
+
+
+
+
+3. Sets
+
+redis> SADD uniquewords austerity(integer) 1redis> SADD uniquewords pragmatic(integer) 1redis> SADD uniquewords moritorium(integer) 1redis> SADD uniquewords socialism(integer) 1redis> SADD uniquewords socialism(integer) 0
+
+
+
+
+4. Sorted Sets
+
+redis> ZADD wordswithlength 9 austerity(integer) 1redis> ZADD wordswithlength 7 furtive(integer) 1redis> ZADD wordswithlength 5 bigot(integer) 1redis> ZRANGE wordswithlength 0 -11) "bigot"2) "furtive"3) "austerity"
+
+
+5. Hashes
+
+redis> HSET user:1 name shekhar(integer) 1redis> HSET user:1 lastname gulati(integer) 1redis> HGET user:1redis> HGET user:1 name"shekhar"redis> HGETALL user:11) "name"2) "shekhar"3) "lastname"4) "gulati"
