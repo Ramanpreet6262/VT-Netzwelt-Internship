@@ -1,0 +1,6 @@
+These are basically components that wrap another components.
+
+They don't return any html or JSX, they are simply there to fulfill react's requirement of having a wrapping
+component.
+
+React.Fragment is a built in hoc component available to solve this purpose...

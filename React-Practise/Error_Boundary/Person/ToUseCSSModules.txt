@@ -1,0 +1,10 @@
+To use CSS Modules in our code we need to update our build configuration of our project:
+
+So follow the steps:
+
+1. Run 'npm run eject' in terminal.
+This will eject the project from this under the hood configuration where we don't really have access
+to the underlying webpack config files and give us access to config files so that you can tweek how
+your code is bundled together and there is something we will need to tweak there..
+
+And then edit the webpack config files a bit and we are ready to go...

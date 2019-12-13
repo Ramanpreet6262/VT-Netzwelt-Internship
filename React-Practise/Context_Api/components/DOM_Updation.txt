@@ -1,0 +1,13 @@
+render() method does not directly re-render original dom or browser dom
+
+This re rendering is prevented by shouldComponentUpdate or memo() when props don't change
+But still if props change and there is no change it will not rerender original dom
+Rather it checks or compares virtual doms old and new one created by JSX..
+
+It uses this as this Virtual dom comparing is faster than real doms
+
+If it find any differences in virtual doms, then it reaches out the real DOM and updates it...
+And even then it doesn't re render real DOM entirely, rather it only do changes at places where differences 
+are detected...
+
+And if no differences are found, it doesn't touch the real DOM..

@@ -1,0 +1,20 @@
+ Also if we need componentDidMount() in React hooks useEffect() then pass an empty array as an argument
+ to it along with function so it will only run at initialising once and not afterwards
+
+   --------------------------------------------------------
+  /* OPTIMISATION CONCEPT */
+
+   Also shouldComponentUpdate can help save us some performance by checking old and new props and preventing
+   some re-renders .....
+   As by default it checks every time whether virtual dom is changed or not, if yes then reflect it in real dom also
+
+   This shouldComponentUpdate is not available in functional components when using react hooks i.e. useEffect
+  So, in that case we use React.memo, actually wrap the component with it while exporting...
+  This basically uses memoisation, it is a technique where react will memoise or store a snapshot of this component
+  and only if its input changes i.e. props elements then it will rerender it otherwise if inputs don't change and same parent
+  component wants to update it, react will give back that stored snapshot of component thus saving rerenders.. 
+
+ ---------------------------------------------------------------------
+
+Pure Component is just a normal component that already implements shouldComponentUpdate with a complete
+props check
