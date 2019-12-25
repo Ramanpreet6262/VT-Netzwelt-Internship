@@ -16,7 +16,7 @@ class NewPost extends Component {
       body: this.state.content,
       author: this.state.author
     };
-    axios.post('https://jsonplaceholder.typicode.com/posts', data).then(res => {
+    axios.post('/posts', data).then(res => {
       console.log(res);
     });
     // Point to note is axios automatically does json.stringify() under the hood for us...
