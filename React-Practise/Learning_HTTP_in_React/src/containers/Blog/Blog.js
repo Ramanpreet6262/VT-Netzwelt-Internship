@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 
 import './Blog.css';
 import Posts from './Posts/Posts';
+import NewPost from './NewPost/NewPost';
+import FullPost from './FullPost/FullPost';
 
 class Blog extends Component {
   render() {
@@ -12,10 +14,19 @@ class Blog extends Component {
           <nav>
             <ul>
               <li>
-                <a href='/'>Home</a>
+                <Link to='/'>Home</Link>
               </li>
               <li>
-                <a href='/new-post'>New Post</a>
+                <Link
+                  to={{
+                    pathname: '/new-post', // Absolute Path
+                    // pathname: this.props.match.url + '/new-post', // Relative Path
+                    hash: '#submit',
+                    search: '?quick-submit=true'
+                  }}
+                >
+                  New Post
+                </Link>
               </li>
             </ul>
           </nav>
@@ -29,6 +40,8 @@ class Blog extends Component {
         {/* <Route path='/' exact render={() => <h1>Home</h1>} />
         <Route path='/' render={() => <h1>Home2</h1>} /> */}
         <Route path='/' exact component={Posts} />
+        <Route path='/new-post' component={NewPost} />
+        <Route path='/full-post' exact component={FullPost} />
       </div>
     );
   }

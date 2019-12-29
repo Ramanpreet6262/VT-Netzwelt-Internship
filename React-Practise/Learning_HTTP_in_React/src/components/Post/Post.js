@@ -1,4 +1,7 @@
 import React from 'react';
+// import { withRouter } from 'react-router-dom';
+// withRouter is a higher order component which we use by wraping our exported component
+// It adds location and other history and match routes in components down in the component tree
 
 import './Post.css';
 
@@ -11,4 +14,5 @@ const post = props => (
   </article>
 );
 
+// export default withRouter(post);
 export default post;

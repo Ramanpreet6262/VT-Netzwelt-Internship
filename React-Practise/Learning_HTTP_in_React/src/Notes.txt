@@ -1,0 +1,14 @@
+Absolute path --
+Absolute path means that it's always appended right after your domain.
+
+Domain -- raman.com
+
+Then absolute path is -- raman.com/new-post  for (/new-post)
+and if you are currently at raman.com/posts then absolute path would mean raman.com/new-post
+
+Whereas relative path would mean --
+if you are currently at raman.com/posts then relative path would mean raman.com/posts/new-post
+
+when we set to or pathname in <Link> then it is by default set to absolute path 
+And to set it to relative path we need get the current path and append our route to it...
+for which we use `this.props.match.url` .....
