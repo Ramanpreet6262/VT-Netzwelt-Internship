@@ -12,3 +12,44 @@ if you are currently at raman.com/posts then relative path would mean raman.com/
 when we set to or pathname in <Link> then it is by default set to absolute path 
 And to set it to relative path we need get the current path and append our route to it...
 for which we use `this.props.match.url` .....
+
+
+
+We use `Link` in normal links and `NavLink` when we need to set active Route by providing css Class
+
+
+
+Route Parameters==
+
+/:id   with colon 
+It is accessed via `props.match.params.id`
+
+
+Query Parameters or Search==
+
+/?something=somevalue
+It is accessed via `props.location.search`
+But this will only give us something like ?start=5 
+
+We probably want to get the key-value pair, without the ?  and the = . 
+Here's a snippet which allows us to easily extract that information:
+
+    componentDidMount() {
+        const query = new URLSearchParams(this.props.location.search);
+        for (let param of query.entries()) {
+            console.log(param); // yields ['start', '5']
+        }
+    }
+
+URLSearchParams  is a built-in object, shipping with vanilla JavaScript. 
+It returns an object, which exposes the entries()  method. 
+entries()  returns an Iterator - basically a construct which can be used in a for...of...  loop.
+
+When looping through query.entries() , we get arrays where the first element is the key name (e.g. start ) 
+and the second element is the assigned value (e.g. 5 ).`
+
+
+Fragments==
+
+/#something
+It is accessed via `props.location.hash`
