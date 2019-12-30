@@ -10,11 +10,19 @@ class FullPost extends Component {
 
   // componentDidUpdate() { //because now we are not updating it rather it is getting added or removed to&from dom
   componentDidMount() {
+    this.loadData();
+  }
+
+  componentDidUpdate() {
+    this.loadData();
+  }
+
+  loadData() {
     if (this.props.match.params.id) {
       if (
         !this.state.loadedPost ||
         (this.state.loadedPost &&
-          this.state.loadedPost.id !== this.props.match.params.id)
+          this.state.loadedPost.id !== +this.props.match.params.id) // '+' to convert string to a number
       ) {
         axios.get('/posts/' + this.props.match.params.id).then(res => {
           this.setState({ loadedPost: res.data });

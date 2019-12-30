@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 import './NewPost.css';
 
@@ -7,7 +8,8 @@ class NewPost extends Component {
   state = {
     title: '',
     content: '',
-    author: 'Max'
+    author: 'Max',
+    submitted: false
   };
 
   postDataHandler = () => {
@@ -18,13 +20,22 @@ class NewPost extends Component {
     };
     axios.post('/posts', data).then(res => {
       console.log(res);
+      this.setState({ submitted: true }); // This will replaces current page with this page on the stack and if we click back button we can't go back to new-post page...
+      // Another way to change page by history prop
+      // this.props.history.push('/posts'); // This will push this page onto stack and if we click back button we can go to new-post page...
+      // this.props.history.replace('/posts'); // This will do same behaviour as Redirect by replacing current page on stack...
     });
     // Point to note is axios automatically does json.stringify() under the hood for us...
   };
 
   render() {
+    let redirect = null;
+    if (this.state.submitted) {
+      redirect = <Redirect to='/posts' />;
+    }
     return (
       <div className='NewPost'>
+        {redirect}
         <h1>Add a Post</h1>
         <label>Title</label>
         <input
