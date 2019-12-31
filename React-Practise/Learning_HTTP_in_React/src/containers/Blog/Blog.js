@@ -3,12 +3,16 @@ import { Route, NavLink, Switch } from 'react-router-dom';
 
 import './Blog.css';
 import Posts from './Posts/Posts';
-import NewPost from './NewPost/NewPost';
 import Error404 from '../../components/error404/error404';
+import asyncComponent from '../../hoc/asyncComponent';
+// import NewPost from './NewPost/NewPost';
+const AsyncNewPost = asyncComponent(() => {
+  return import('./NewPost/NewPost');
+});
 
 class Blog extends Component {
   state = {
-    auth: false
+    auth: true
   };
 
   render() {
@@ -46,7 +50,7 @@ class Blog extends Component {
         <Route path='/' render={() => <h1>Home2</h1>} /> */}
         <Switch>
           {this.state.auth ? (
-            <Route path='/new-post' component={NewPost} />
+            <Route path='/new-post' component={AsyncNewPost} />
           ) : null}
           <Route path='/posts' component={Posts} />
           {/* This redirect will catch all other routes as it is from='/' so one way is this and other is to make a master route i.e. by 
