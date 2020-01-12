@@ -53,3 +53,14 @@ Fragments==
 
 /#something
 It is accessed via `props.location.hash`
+
+
+history, location, match, etc. props are available only in components that are rendered by the <Route />
+of react-router-dom and not in their child components or the components being called by them.
+
+So we have to pass them manually, or we can do so by a special hoc withRouter() method in the child component.
+
+Also these history, match, etc. props are available in components that are rendered through Route inside Browser router
+But only those have these props that are rendered using component={App} in <Route />
+And those rendered using render(() => <App />) don't have these props so we can do one thing like creating a new
+history object and passing it as props to the component
