@@ -39,5 +39,3 @@ store.subscribe(() => {
 store.dispatch({ type: 'INC_COUNTER' });
 store.dispatch({ type: 'ADD_COUNTER', value: 6 });
 console.log(store.getState());
-
-// 14 section : 12 vid...
