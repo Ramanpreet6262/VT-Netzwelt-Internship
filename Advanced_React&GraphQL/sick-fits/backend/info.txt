@@ -1,0 +1,8 @@
+Your Prisma endpoint is live:
+
+  HTTP:  https://eu1.prisma.sh/ramanpreet-singh-1df8c2/siccccck-fitsssss/dev
+  WS:    wss://eu1.prisma.sh/ramanpreet-singh-1df8c2/siccccck-fitsssss/dev
+
+You can view & edit your data here:
+
+  Prisma Admin: https://eu1.prisma.sh/ramanpreet-singh-1df8c2/siccccck-fitsssss/dev/_admin
