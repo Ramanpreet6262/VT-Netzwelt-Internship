@@ -4523,7 +4523,7 @@ Index.getInitialProps = function _callee() {
 
 /***/ }),
 
-/***/ 4:
+/***/ 1:
 /*!******************************************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2F&absolutePagePath=%2Fhome%2Fadam%2Fgithub%2FVT-Netzwelt-Internship%2FNextJS-Practise%2FDocs-Tutorial-Project%2Fpages%2Findex.js ***!
   \******************************************************************************************************************************************************************************/
@@ -4546,5 +4546,5 @@ module.exports = dll_2adc2403d89adc16ead0;
 
 /***/ })
 
-},[[4,"static/runtime/webpack.js"]]]);
+},[[1,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=index.js.map
