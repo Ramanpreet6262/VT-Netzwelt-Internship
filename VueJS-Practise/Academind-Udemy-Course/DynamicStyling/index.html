@@ -17,6 +17,15 @@
     <div class="demo" :class="[color, {red: attachRed}]"></div>
     <hr>
     <input type="text" v-model="color">
+    <hr>
+    <hr>
+    <hr>
+    <div class="demo" :style="{backgroundColor: colorr}"></div>
+    <div class="demo" :style="myStyle"></div>
+    <div class="demo" :style="[myStyle, {height: width + 'px'}]"></div>
+    <hr>
+    <input type="text" v-model="colorr">
+    <input type="text" v-model="width">
   </div>
 
 
