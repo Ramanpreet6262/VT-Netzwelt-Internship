@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Vue Basics</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="">
+</head>
+
+<body>
+
+	<div id="app">
+		<h1 v-once>{{ title }}</h1>
+		<p>{{ sayHello() }} - <a v-bind:href='link'>Google</a></p>
+		<hr>
+		<p v-html='finishedLink'></p>
+		<hr>
+		<hr>
+		<h2>Event Handling</h2>
+		<button v-on:click='incrementCount(6, $event)'>Click me</button>
+		<!-- if u want to send event object too along use $event -->
+		<p>{{ counter }}</p>
+		<p @mousemove='updateCoords'>Coordinates: {{ x }} / {{ y }} - <span v-on:mousemove='dummy'>Dead Spot</span></p>
+		<!-- to stop updating coords on hovering over dead spot, either folllow implemented approach or do this thing..
+			<span v-on:mousemove.stop=''>Dead Spot</span>, i.e. this is known as modifiers or event modifiers
+			These modifiers allows to modify the behaviour of this event. '.stop' -> for stop propagation
+			And '.prevent' for preventDefault-->
+		<!-- Apart from event modifiers, we also have key modifiers -->
+		<input type='text' v-on:keyup.enter.space='alertMe'>
+		<!-- Now if we only want to run alertMe method on some specific keyup and not all keyup events we use 
+		eg-- '.enter' after keyup and it will work fine, similarly for other keys too and we can chain them too..-->
+
+		<!-- We can also use js code in our double curly braces and directive events' strings but that should be a single expression -->
+		<p>{{ showPara ? 'Paragraph' : null }}</p>
+
+		<p>{{ name }}</p>
+		<input type='text' v-model='name'> 
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="app.js"></script>
+</body>
+
+</html>
